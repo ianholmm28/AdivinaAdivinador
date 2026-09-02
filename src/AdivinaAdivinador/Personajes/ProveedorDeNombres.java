@@ -9,24 +9,19 @@ public class ProveedorDeNombres {
     private final ArrayList<String> nombresMasculinos;
     private final ArrayList<String> nombresFemeninos;
 
-    public ProveedorDeNombres(
-            ArrayList<String> nombresMasculinos,
-            ArrayList<String> nombresFemeninos) {
-
+    public ProveedorDeNombres(ArrayList<String> nombresMasculinos, ArrayList<String> nombresFemeninos){
         this.nombresMasculinos = new ArrayList<>(nombresMasculinos);
         this.nombresFemeninos = new ArrayList<>(nombresFemeninos);
     }
 
     public String obtenerNombre(Caracteristicas.Genero genero) {
-
         if (genero == Caracteristicas.Genero.HOMBRE) {
-            return obtenerNombre(nombresMasculinos);
+            return eliminarNombre(nombresMasculinos);
         }
-
-        return obtenerNombre(nombresFemeninos);
+        return eliminarNombre(nombresFemeninos);
     }
 
-    private String obtenerNombre(ArrayList<String> nombres) {
+    private String eliminarNombre(ArrayList<String> nombres) {
         int indice = random.nextInt(nombres.size());
         return nombres.remove(indice);
     }

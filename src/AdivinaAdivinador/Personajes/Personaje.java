@@ -5,7 +5,7 @@ public class Personaje {
     private final String nombre;
     private final Caracteristicas caracteristicas;
 
-    public Personaje(String nombre, Caracteristicas caracteristicas) {
+    public Personaje(String nombre, Caracteristicas caracteristicas){
         this.nombre = nombre;
         this.caracteristicas = caracteristicas;
     }

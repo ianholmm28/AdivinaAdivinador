@@ -16,8 +16,7 @@ public abstract class Jugador {
         this.preguntasDisponibles = preguntasDisponibles;
 
         Random random = new Random();
-        personajeSecreto =
-                personajes.get(random.nextInt(personajes.size()));
+        personajeSecreto = personajes.get(random.nextInt(personajes.size()));
     }
 
     public ArrayList<Personaje> getPersonajes() {

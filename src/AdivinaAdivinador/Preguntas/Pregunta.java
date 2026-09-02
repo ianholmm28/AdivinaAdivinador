@@ -3,8 +3,7 @@ package AdivinaAdivinador.Preguntas;
 public class Pregunta {
 
     private String texto;
-    private TipoPregunta tipo;
-    public enum TipoPregunta{}
+    private CreadorDePreguntas.TipoPregunta tipo;
 
     public Pregunta(String texto, TipoPregunta tipo){
         this.texto = texto;
@@ -13,6 +12,4 @@ public class Pregunta {
 
     public String getTexto(){return texto;}
     public TipoPregunta getTipo(){return tipo;}
-
-    @Override public String toString() {return texto;}
 }

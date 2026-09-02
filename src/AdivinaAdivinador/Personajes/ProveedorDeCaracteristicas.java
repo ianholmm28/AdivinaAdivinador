@@ -14,7 +14,8 @@ public class ProveedorDeCaracteristicas {
         if (genero == Caracteristicas.Genero.HOMBRE) {
             esCalvo = Math.random() < 0.3;
             tieneBarba = Math.random() < 0.5;
-        } else {
+        }
+        else {
             esCalvo = false;
             tieneBarba = false;
         }

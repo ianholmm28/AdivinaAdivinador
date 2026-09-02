@@ -3,7 +3,6 @@ package AdivinaAdivinador.Personajes;
 public class Caracteristicas {
 
     public enum ColorPelo {NEGRO, RUBIO, ROJO}
-
     public enum Genero {HOMBRE, MUJER}
 
     private final boolean esCalvo;
@@ -26,6 +25,7 @@ public class Caracteristicas {
     public boolean usaLentes() {return usaLentes;}
     public boolean tieneBarba() {return tieneBarba;}
 
+    //Eliminar:
     @Override
     public String toString() {
         return (esCalvo + " " + colorPelo + genero + usaLentes + tieneBarba);
