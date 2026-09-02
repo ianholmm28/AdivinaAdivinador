@@ -1,82 +1,33 @@
 package AdivinaAdivinador;
+import AdivinaAdivinador.Jugadores.Jugador;
+import AdivinaAdivinador.Jugadores.JugadorHumano;
+import AdivinaAdivinador.Jugadores.JugadorMaquina;
+import AdivinaAdivinador.Personajes.CreadorDeListaDePersonajes;
+import AdivinaAdivinador.Personajes.Personaje;
+import AdivinaAdivinador.Preguntas.Pregunta;
+
+import java.util.List;
+
 import java.util.ArrayList;
 
 public class Juego {
 
-    Sistema sistema = new Sistema();
+    private final Sistema sistema;
+    private final CreadorDeListaDePersonajes creadorDeListaDePersonajes;
 
-    public void Presentar() {
-        System.out.println("Bienvenido a AdivinaAdivinador de Star Wars. Esto me imagino que se saca cuando se haga la interfaz.");
-        System.out.println("- 1: Humano vs Maquina\n- 2: Maquina vs Maquina");
+    public Juego(Sistema sistema, CreadorDeListaDePersonajes creadorDeListaDePersonajes) {
+        this.sistema = sistema;
+        this.creadorDeListaDePersonajes = creadorDeListaDePersonajes;
     }
 
-    public ArrayList<Personaje> iniciarListaPersonajes() {
-
-        String[] nombres = {
-                "Obi-Wan Kenobi (Ep II)",
-                "Luke Skywalker (Ep IV)",
-                "Han Solo (Ep V)",
-                "Lando Calrissian (Ep V)",
-                "Anakin Skywalker (Ep II)",
-                "Darth Vader (Ep V)",
-                "Palpatine (Ep II)",
-                "Count Dooku",
-                "Boba Fett",
-                "Mace Windu",
-                "Poe Dameron (Ep VII)",
-                "Yoda",
-                "Chewbacca",
-                "Leia Organa",
-                "Padmé Amidala",
-                "Rey (Ep VIII)",
-                "Ahsoka Tano (TCW S7)",
-                "Asajj Ventress",
-                "Capitan Phasma",
-                "Bo-Katan Kryze",
-                "Hera Syndulla",
-                "Kylo Ren (Ep VII)",
-                "Mon Mothma (Ep VI)"
-        };
-        boolean[] esHumano = {true, true, true, true, true, true, true, true, true, true, true, false, false, true, true, true, false, false, false, true, false, true, true};
-        boolean[] esVillano = {false, false, false, false, false, true, true, true, true, false, false, false, false, false, false, false, false, true, true, false, false, true, false};
-        boolean[] esMasculino = {true, true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, true, false};
-        boolean[] tienePelo = {true, true, true, true, true, false, false, true, false, false, true, false, true, true, true, true, true, false, false, true, true, true, true};
-        boolean[] tieneBarba = {true, false, false, true, false, false, false, true, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false};
-        boolean[] esForceSensitive = {true, true, false, false, true, true, true, true, false, true, false, true, false, true, false, true, true, true, false, false, false, true, false};
-        boolean[] usaCasco = {false, false, false, false, false, true, false, false, true, false, true, false, false, false, false, false, false, false, true, true, false, true, false};
-        boolean[] usaBlaster = {false, true, true, true, false, false, false, false, true, false, true, false, true, true, true, false, false, false, true, true, true, false, false};
-
-        ArrayList<Personaje> personajes = new ArrayList<>();
-
-        for (int i = 0; i < nombres.length; i++) {
-            personajes.add(new Personaje(
-                    i + 1,
-                    nombres[i],
-                    esHumano[i],
-                    esVillano[i],
-                    esForceSensitive[i],
-                    esMasculino[i],
-                    tienePelo[i]
-            ));
-        }
-
-        for (int i = 0; i < personajes.size(); i++) { //Eliminar
-            System.out.println(personajes.get(i).toString());
-        }
-
-        return personajes;
+    public void presentar() {
+        System.out.println("Bienvenido a AdivinaAdivinador.\n- 1: Humano vs Maquina\n- 2: Maquina vs Maquina");
     }
-
 
     void jugarJuego() {
 
-        ArrayList<Personaje> personajes = iniciarListaPersonajes();
-        ArrayList<String> preguntasDisponibles = new ArrayList<>();
-        preguntasDisponibles.add("¿Mi personaje es humano?");
-        preguntasDisponibles.add("¿Mi personaje es un villano?");
-        preguntasDisponibles.add("¿Mi personaje es sensible a la Fuerza?");
-        preguntasDisponibles.add("¿Mi personaje es hombre?");
-        preguntasDisponibles.add("¿Mi personaje tiene pelo?");
+        presentar();
+        List<Personaje> personajes = creadorDeListaDePersonajes.generarPersonajes(23);
         int modo = sistema.ingresarInt(1,2);
 
         Jugador jugador1;

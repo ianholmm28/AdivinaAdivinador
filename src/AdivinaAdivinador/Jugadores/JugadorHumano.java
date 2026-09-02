@@ -1,12 +1,16 @@
-package AdivinaAdivinador;
+package AdivinaAdivinador.Jugadores;
+import AdivinaAdivinador.Personajes.Personaje;
+import AdivinaAdivinador.Preguntas.Pregunta;
+import AdivinaAdivinador.Sistema;
+
 import java.util.ArrayList;
 
 public class JugadorHumano extends Jugador {
 
-    Sistema sistema;
+    private final Sistema sistema;
 
-    public JugadorHumano(ArrayList<Personaje> personajes, Sistema sistema) {
-        super(personajes);
+    public JugadorHumano(ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntas, Sistema sistema) {
+        super(personajes, preguntas);
         this.sistema = sistema;
     }
 

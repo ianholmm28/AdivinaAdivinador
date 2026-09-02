@@ -1,10 +1,10 @@
-package AdivinaAdivinador;
+package AdivinaAdivinador.Preguntas;
 
 public class Pregunta {
 
     private String texto;
     private TipoPregunta tipo;
-    public enum TipoPregunta{HUMANO, VILLANO, FORCE_SENSITIVE, MASCULINO, PELO}
+    public enum TipoPregunta{}
 
     public Pregunta(String texto, TipoPregunta tipo){
         this.texto = texto;

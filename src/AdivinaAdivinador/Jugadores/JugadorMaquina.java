@@ -1,4 +1,7 @@
-package AdivinaAdivinador;
+package AdivinaAdivinador.Jugadores;
+
+import AdivinaAdivinador.Personajes.Personaje;
+import AdivinaAdivinador.Preguntas.Pregunta;
 
 import java.util.ArrayList;
 
