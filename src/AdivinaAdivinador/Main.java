@@ -1,9 +1,6 @@
 package AdivinaAdivinador;
-import AdivinaAdivinador.Personajes.ProveedorDeNombres;
-import AdivinaAdivinador.Personajes.ProveedorDeCaracteristicas;
-import AdivinaAdivinador.Personajes.CreadorDeListaDePersonajes;
-import AdivinaAdivinador.Personajes.CreadorDePersonaje;
-import AdivinaAdivinador.Personajes.ListaDeNombres;
+import AdivinaAdivinador.Personajes.*;
+import AdivinaAdivinador.Preguntas.CreadorDeListaDePreguntas;
 
 public class Main {
 
@@ -19,7 +16,11 @@ public class Main {
 
         CreadorDeListaDePersonajes creadorDeListaDePersonajes = new CreadorDeListaDePersonajes(creadorDePersonaje);
 
-        Juego juego = new Juego(sistema, creadorDeListaDePersonajes);
+        SelectorDePersonajeSecreto selectorDePersonajeSecreto = new SelectorDePersonajeSecreto();
+
+        CreadorDeListaDePreguntas creadorDeListaDePreguntas = new CreadorDeListaDePreguntas();
+
+        Juego juego = new Juego(sistema, creadorDeListaDePersonajes, creadorDeListaDePreguntas, selectorDePersonajeSecreto);
 
         juego.jugarJuego();
     }

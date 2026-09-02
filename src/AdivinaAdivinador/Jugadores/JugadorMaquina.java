@@ -6,20 +6,19 @@ import java.util.ArrayList;
 
 public class JugadorMaquina extends Jugador {
 
-    public JugadorMaquina(ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles) {
-        super(personajes, preguntasDisponibles);
+    public JugadorMaquina(ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles, Personaje personajeSecreto) {
+        super(personajes, preguntasDisponibles, personajeSecreto);
     }
 
     @Override
     public Personaje adivinarPersonaje() {
-        // Lo hago dsp
+        // Lo hago después
         return null;
     }
 
     @Override
     public Pregunta elegirOpcion() {
-
-        //aaaaa
-        return getPreguntasDisponibles().get(0);
+        //aaaaaauuuu
+        return null;
     }
 }

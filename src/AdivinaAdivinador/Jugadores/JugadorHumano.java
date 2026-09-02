@@ -8,8 +8,8 @@ public class JugadorHumano extends Jugador{
 
     private final Sistema sistema;
 
-    public JugadorHumano(ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles, Sistema sistema) {
-        super(personajes, preguntasDisponibles);
+    public JugadorHumano(ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles, Personaje personajeSecreto, Sistema sistema) {
+        super(personajes, preguntasDisponibles, personajeSecreto);
         this.sistema = sistema;
     }
 
@@ -29,7 +29,7 @@ public class JugadorHumano extends Jugador{
             ArrayList<Pregunta> preguntas = getPreguntasDisponibles();
             System.out.println("=== Preguntas disponibles ===");
             for (int i = 0; i < preguntas.size(); i++) {
-                System.out.println((i + 1) + ": " + preguntas.get(i));
+                System.out.println((i + 1) + ": " + preguntas.get(i).getTexto());
             }
 
             int preguntaElegida = sistema.ingresarInt(1, preguntas.size());return preguntas.remove(preguntaElegida - 1);

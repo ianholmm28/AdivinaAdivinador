@@ -11,12 +11,10 @@ public abstract class Jugador {
     private final ArrayList<Pregunta> preguntasDisponibles;
     private final Personaje personajeSecreto;
 
-    public Jugador(ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles) {
+    public Jugador(ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles, Personaje personajeSecreto) {
         this.personajes = personajes;
         this.preguntasDisponibles = preguntasDisponibles;
-
-        Random random = new Random();
-        personajeSecreto = personajes.get(random.nextInt(personajes.size()));
+        this.personajeSecreto = personajeSecreto;
     }
 
     public ArrayList<Personaje> getPersonajes() {
@@ -27,9 +25,7 @@ public abstract class Jugador {
         return personajeSecreto;
     }
 
-    public ArrayList<Pregunta> getPreguntasDisponibles() {
-        return preguntasDisponibles;
-    }
+    public ArrayList<Pregunta> getPreguntasDisponibles() {return preguntasDisponibles;}
 
     public abstract Personaje adivinarPersonaje();
 
