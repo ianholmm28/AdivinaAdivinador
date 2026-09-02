@@ -54,6 +54,16 @@ public class Juego {
         Jugador ganador = null;
         boolean turnoJugador1 = false;
 
+
+        //debug
+        System.out.println("=== PERSONAJES DEL JUGADOR HUMANO ===");
+        for (Personaje personaje : jugador1.getPersonajes()) {
+            System.out.println(personaje);
+        }
+        System.out.println("=== PERSONAJE SECRETO DEL JUGADOR HUMANO ===\n"+jugador1.getPersonajeSecreto());
+
+
+
         while (!juegoTerminado){
             turnoJugador1 = !turnoJugador1;
             Jugador jugadorActual;

@@ -10,8 +10,11 @@ public class CreadorDePersonaje {
         this.proveedorDeCaracteristicas = proveedorDeCaracteristicas;
     }
 
-    public Personaje crearPersonaje() {
-        Caracteristicas caracteristicas = proveedorDeCaracteristicas.obtenerCaracteristicas();
+    public Caracteristicas crearCaracteristicas() {
+        return proveedorDeCaracteristicas.obtenerCaracteristicas();
+    }
+
+    public Personaje crearPersonaje(Caracteristicas caracteristicas) {
         String nombre = proveedorDeNombres.obtenerNombre(caracteristicas.getGenero());
         return new Personaje(nombre, caracteristicas);
     }

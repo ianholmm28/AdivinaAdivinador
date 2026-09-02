@@ -1,5 +1,4 @@
 package AdivinaAdivinador.Personajes;
-
 import java.util.List;
 import java.util.Random;
 

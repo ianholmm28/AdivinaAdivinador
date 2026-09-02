@@ -14,7 +14,9 @@ public class Main {
 
         CreadorDePersonaje creadorDePersonaje = new CreadorDePersonaje(proveedorDeNombres, proveedorDeCaracteristicas);
 
-        CreadorDeListaDePersonajes creadorDeListaDePersonajes = new CreadorDeListaDePersonajes(creadorDePersonaje);
+        ComparadorDePersonajes comparadorDePersonajes = new ComparadorDePersonajes();
+
+        CreadorDeListaDePersonajes creadorDeListaDePersonajes = new CreadorDeListaDePersonajes(creadorDePersonaje, comparadorDePersonajes);
 
         SelectorDePersonajeSecreto selectorDePersonajeSecreto = new SelectorDePersonajeSecreto();
 
