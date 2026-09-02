@@ -1,4 +1,5 @@
 package AdivinaAdivinador;
+import AdivinaAdivinador.Algoritmos.AlgoritmoMergeSort;
 import AdivinaAdivinador.Personajes.*;
 import AdivinaAdivinador.Preguntas.CreadorDeListaDePreguntas;
 
@@ -8,6 +9,8 @@ public class Main {
 
         Sistema sistema = new Sistema();
 
+        AlgoritmoMergeSort mergeSort = new AlgoritmoMergeSort();
+
         ProveedorDeNombres proveedorDeNombres = new ProveedorDeNombres(ListaDeNombres.nombresMasculinos(), ListaDeNombres.nombresFemeninos());
 
         ProveedorDeCaracteristicas proveedorDeCaracteristicas = new ProveedorDeCaracteristicas();
@@ -16,7 +19,7 @@ public class Main {
 
         ComparadorDePersonajes comparadorDePersonajes = new ComparadorDePersonajes();
 
-        CreadorDeListaDePersonajes creadorDeListaDePersonajes = new CreadorDeListaDePersonajes(creadorDePersonaje, comparadorDePersonajes);
+        CreadorDeListaDePersonajes creadorDeListaDePersonajes = new CreadorDeListaDePersonajes(creadorDePersonaje, comparadorDePersonajes, mergeSort);
 
         SelectorDePersonajeSecreto selectorDePersonajeSecreto = new SelectorDePersonajeSecreto();
 

@@ -1,14 +1,18 @@
 package AdivinaAdivinador.Personajes;
+import java.lang.classfile.instruction.ArrayLoadInstruction;
 import java.util.ArrayList;
+import AdivinaAdivinador.Algoritmos.AlgoritmoMergeSort;
 
 public class CreadorDeListaDePersonajes {
 
     private final CreadorDePersonaje creadorDePersonaje;
     private final ComparadorDePersonajes comparador;
+    private final AlgoritmoMergeSort mergeSort;
 
-    public CreadorDeListaDePersonajes(CreadorDePersonaje creadorDePersonaje, ComparadorDePersonajes comparador) {
+    public CreadorDeListaDePersonajes(CreadorDePersonaje creadorDePersonaje, ComparadorDePersonajes comparador, AlgoritmoMergeSort mergeSort) {
         this.creadorDePersonaje = creadorDePersonaje;
         this.comparador = comparador;
+        this.mergeSort = mergeSort;
     }
 
     public ArrayList<Personaje> generarPersonajes(int cantidad) {
@@ -27,6 +31,7 @@ public class CreadorDeListaDePersonajes {
                 personajes.add(nuevo);
             }
         }
+        personajes = mergeSort.ordenarPorGenero(personajes);
         return personajes;
     }
 }
