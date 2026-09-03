@@ -21,7 +21,7 @@ public class ProveedorDeCaracteristicas {
         }
 
         if (esCalvo && !tieneBarba){
-            colorPelo = Caracteristicas.ColorPelo.NADA;
+            colorPelo = null;
         }
         else{
             colorPelo = Caracteristicas.ColorPelo.values()[(int) (Math.random() * Caracteristicas.ColorPelo.values().length)];
