@@ -11,6 +11,7 @@ public class ComparadorDePersonajes {
                 && caracteristicas1.getColorPelo() == caracteristicas2.getColorPelo()
                 && caracteristicas1.getGenero() == caracteristicas2.getGenero()
                 && caracteristicas1.usaLentes() == caracteristicas2.usaLentes()
-                && caracteristicas1.tieneBarba() == caracteristicas2.tieneBarba();
+                && caracteristicas1.tieneBarba() == caracteristicas2.tieneBarba()
+                && caracteristicas1.getColorRemera() == caracteristicas2.getColorRemera();
     }
 }

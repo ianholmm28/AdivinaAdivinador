@@ -11,13 +11,15 @@ public class Caracteristicas {
     private final Genero genero;
     private final boolean usaLentes;
     private final boolean tieneBarba;
+    private final ColorRemera colorRemera;
 
-    public Caracteristicas(boolean esCalvo, ColorPelo colorPelo, Genero genero, boolean usaLentes, boolean tieneBarba) {
+    public Caracteristicas(boolean esCalvo, ColorPelo colorPelo, Genero genero, boolean usaLentes, boolean tieneBarba, ColorRemera colorRemera) {
         this.esCalvo = esCalvo;
         this.colorPelo = colorPelo;
         this.genero = genero;
         this.usaLentes = usaLentes;
         this.tieneBarba = tieneBarba;
+        this.colorRemera = colorRemera;
     }
 
     public boolean esCalvo() {return esCalvo;}
@@ -25,8 +27,9 @@ public class Caracteristicas {
     public Genero getGenero() {return genero;}
     public boolean usaLentes() {return usaLentes;}
     public boolean tieneBarba() {return tieneBarba;}
+    public ColorRemera getColorRemera() {return colorRemera;}
 
     @Override public String toString() {
-        return "Genero: " + genero + " | Calvo: " + esCalvo + " | Color de pelo: " + colorPelo + " | Barba: " + tieneBarba + " | Lentes: " + usaLentes;
+        return "Genero: " + genero + " | Calvo: " + esCalvo + " | Color de pelo: " + colorPelo + " | Color de Remera: " + colorRemera + " | Barba: " + tieneBarba + " | Lentes: " + usaLentes;
     }
 }
