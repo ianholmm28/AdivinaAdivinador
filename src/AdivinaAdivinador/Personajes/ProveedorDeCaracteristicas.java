@@ -9,7 +9,7 @@ public class ProveedorDeCaracteristicas {
         Caracteristicas.ColorRemera colorRemera = Caracteristicas.ColorRemera.values()[(int) (Math.random() * Caracteristicas.ColorRemera.values().length)];
 
         boolean usaLentes = Math.random() < 0.3;
-        boolean tieneGorro = Math.random() < 0.4;
+        boolean tieneGorro = Math.random() < 0.15;
         boolean esCalvo;
         boolean tieneBarba;
 
