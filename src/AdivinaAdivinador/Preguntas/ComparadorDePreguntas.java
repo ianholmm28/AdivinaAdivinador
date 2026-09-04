@@ -36,7 +36,7 @@ public class ComparadorDePreguntas {
             case REMERA_LILA:
                 return personaje.getCaracteristicas().getColorRemera() == Caracteristicas.ColorRemera.LILA;
             case GORRO:
-                return personaje.getCaracteristicas().tieneGorro();
+                return personaje.getCaracteristicas().usaGorro();
         }
         return false;
     }

@@ -30,7 +30,7 @@ public class Caracteristicas {
     public boolean usaLentes() {return usaLentes;}
     public boolean tieneBarba() {return tieneBarba;}
     public ColorRemera getColorRemera() {return colorRemera;}
-    public boolean tieneGorro() {return usaGorro;}
+    public boolean usaGorro() {return usaGorro;}
 
     @Override public String toString() {
         return "Genero: " + genero + " | Calvo: " + esCalvo + " | Color de pelo: " + colorPelo + " | Color de Remera: " + colorRemera + " | Barba: " + tieneBarba + " | Lentes: " + usaLentes + " | Gorro:" + usaGorro;
