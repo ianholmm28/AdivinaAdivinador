@@ -14,6 +14,10 @@ public class CreadorDeListaDePreguntas {
         preguntas.add(new Pregunta("¿Mi personaje es rubio?", TiposDePregunta.PELO_RUBIO));
         preguntas.add(new Pregunta("¿Mi personaje es morocho?", TiposDePregunta.PELO_NEGRO));
         preguntas.add(new Pregunta("¿Mi personaje es pelirrojo?", TiposDePregunta.PELO_ROJO));
+        preguntas.add(new Pregunta("¿Mi personaje tiene remera blanca?", TiposDePregunta.REMERA_BLANCA));
+        preguntas.add(new Pregunta("¿Mi personaje tiene remera azul?", TiposDePregunta.REMERA_AZUL));
+        preguntas.add(new Pregunta("¿Mi personaje tiene remera roja?", TiposDePregunta.REMERA_ROJA));
+        preguntas.add(new Pregunta("¿Mi personaje tiene remera verde?", TiposDePregunta.REMERA_VERDE));
 
         return preguntas;
     }

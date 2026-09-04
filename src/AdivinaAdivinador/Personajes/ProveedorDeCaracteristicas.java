@@ -6,6 +6,7 @@ public class ProveedorDeCaracteristicas {
 
         Caracteristicas.ColorPelo colorPelo;
         Caracteristicas.Genero genero = Caracteristicas.Genero.values()[(int) (Math.random() * Caracteristicas.Genero.values().length)];
+        Caracteristicas.ColorRemera colorRemera = Caracteristicas.ColorRemera.values()[(int) (Math.random() * Caracteristicas.ColorRemera.values().length)];
 
         boolean usaLentes = Math.random() < 0.4;
         boolean esCalvo;
@@ -27,7 +28,7 @@ public class ProveedorDeCaracteristicas {
             colorPelo = Caracteristicas.ColorPelo.values()[(int) (Math.random() * Caracteristicas.ColorPelo.values().length)];
         }
 
-        Caracteristicas caracteristicas = new Caracteristicas(esCalvo, colorPelo, genero, usaLentes, tieneBarba);
+        Caracteristicas caracteristicas = new Caracteristicas(esCalvo, colorPelo, genero, usaLentes, tieneBarba, colorRemera);
         return caracteristicas;
     }
 }
