@@ -5,6 +5,7 @@ import AdivinaAdivinador.Jugadores.JugadorMaquina;
 import AdivinaAdivinador.Personajes.CreadorDeListaDePersonajes;
 import AdivinaAdivinador.Personajes.Personaje;
 import AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto;
+import AdivinaAdivinador.Preguntas.ComparadorDePreguntas;
 import AdivinaAdivinador.Preguntas.CreadorDeListaDePreguntas;
 import AdivinaAdivinador.Preguntas.Pregunta;
 import AdivinaAdivinador.View.GameView;
@@ -18,12 +19,15 @@ public class Juego {
     private final CreadorDeListaDePersonajes creadorDeListaDePersonajes;
     private final CreadorDeListaDePreguntas creadorDeListaDePreguntas;
     private final SelectorDePersonajeSecreto selectorDePersonajeSecreto;
+    private final ComparadorDePreguntas comparadorDePreguntas;
 
-    public Juego(Sistema sistema, CreadorDeListaDePersonajes creadorDeListaDePersonajes, CreadorDeListaDePreguntas creadorDeListaDePreguntas, SelectorDePersonajeSecreto selectorDePersonajeSecreto) {
+    public Juego(Sistema sistema, CreadorDeListaDePersonajes creadorDeListaDePersonajes, CreadorDeListaDePreguntas creadorDeListaDePreguntas,
+                 SelectorDePersonajeSecreto selectorDePersonajeSecreto, ComparadorDePreguntas comparadorDePreguntas) {
         this.sistema = sistema;
         this.creadorDeListaDePersonajes = creadorDeListaDePersonajes;
         this.creadorDeListaDePreguntas = creadorDeListaDePreguntas;
         this.selectorDePersonajeSecreto = selectorDePersonajeSecreto;
+        this.comparadorDePreguntas = comparadorDePreguntas;
     }
 
     public void presentar() {
@@ -42,27 +46,23 @@ public class Juego {
 
         Jugador jugador1;
         if (modo == 1) {
+<<<<<<< HEAD
             jugador1 = new JugadorHumano(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, sistema);
             GameView gameView = new GameView(personajeSecretoJugador1, personajes);
 
+=======
+            jugador1 = new JugadorHumano(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, sistema, comparadorDePreguntas);
+>>>>>>> origin/main
         }
         else{
-            jugador1 = new JugadorMaquina(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1);
+            jugador1 = new JugadorMaquina(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, comparadorDePreguntas);
         }
 
-        Jugador jugador2 = new JugadorMaquina(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador2);
+        Jugador jugador2 = new JugadorMaquina(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador2, comparadorDePreguntas);
 
         boolean juegoTerminado = false;
         Jugador ganador = null;
         boolean turnoJugador1 = false;
-
-
-        //debug
-        System.out.println("=== PERSONAJES DEL JUGADOR HUMANO ===");
-        for (Personaje personaje : jugador1.getPersonajes()) {
-            System.out.println(personaje);
-        }
-        System.out.println("=== PERSONAJE SECRETO DEL JUGADOR HUMANO ===\n"+jugador1.getPersonajeSecreto());
 
 
 
@@ -71,14 +71,23 @@ public class Juego {
             Jugador jugadorActual;
             if (turnoJugador1){
                 jugadorActual = jugador1;
+                //Debug
+                System.out.println("=== PERSONAJES DEL JUGADOR HUMANO ===");
+                for (Personaje personaje : jugador1.getPersonajes()) {
+                    System.out.println(personaje);
+                }
+                System.out.println("=== PERSONAJE SECRETO DEL JUGADOR HUMANO ===\n"+jugador1.getPersonajeSecreto());
             }
             else{
                 jugadorActual = jugador2;
             }
 
-            Pregunta pregunta = jugadorActual.elegirOpcion();
-            if (pregunta != null){
-                //Preguntini
+            int opcion = jugadorActual.elegirOpcion();
+            if (opcion == 1){
+                Pregunta preguntaElegida = jugadorActual.elegirPregunta();
+                boolean respuesta = comparadorDePreguntas.coincideCon(jugadorActual.getPersonajeSecreto(), preguntaElegida);
+                jugadorActual.eliminarPersonajes(preguntaElegida, respuesta);
+
             }
             else{
                 Personaje personajeElegido = jugadorActual.adivinarPersonaje();
@@ -88,6 +97,6 @@ public class Juego {
                 }
             }
         }
-        System.out.println("El ganador es " + ganador + ". Que la Fuerza te acompañe.");
+        System.out.println("El ganador es " + ganador + ".");
     }
 }

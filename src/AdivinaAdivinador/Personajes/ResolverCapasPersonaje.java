@@ -30,8 +30,12 @@ public class ResolverCapasPersonaje {
             valor = random.nextInt(1, 3);
             rutas.add(RAIZ + "Anteojos/anteojos" + valor + ".png");
         }
-        
+        if(c.usaGorro()){
+            valor = random.nextInt(1, 3);
+            rutas.add(RAIZ + "Anteojos/Sombrero" + valor + ".png");
+        }
 
+        
         
         
         return rutas;

@@ -1,6 +1,7 @@
 package AdivinaAdivinador;
 import AdivinaAdivinador.Algoritmos.AlgoritmoMergeSort;
 import AdivinaAdivinador.Personajes.*;
+import AdivinaAdivinador.Preguntas.ComparadorDePreguntas;
 import AdivinaAdivinador.Preguntas.CreadorDeListaDePreguntas;
 
 public class Main {
@@ -25,7 +26,9 @@ public class Main {
 
         CreadorDeListaDePreguntas creadorDeListaDePreguntas = new CreadorDeListaDePreguntas();
 
-        Juego juego = new Juego(sistema, creadorDeListaDePersonajes, creadorDeListaDePreguntas, selectorDePersonajeSecreto);
+        ComparadorDePreguntas comparadorDePreguntas = new ComparadorDePreguntas();
+
+        Juego juego = new Juego(sistema, creadorDeListaDePersonajes, creadorDeListaDePreguntas, selectorDePersonajeSecreto, comparadorDePreguntas);
 
         juego.jugarJuego();
     }
