@@ -14,7 +14,7 @@ public class ResolverCapasPersonaje {
 
         rutas.add(RAIZ + carpeta + "/" + (c.getGenero() == Caracteristicas.Genero.HOMBRE ? "pelado.png" : "pelada.png"));
 
-        if (!c.esCalvo() && !c.getColorPelo().equals("NADA")) {
+        if (!c.esCalvo() && c.getColorPelo() != Caracteristicas.ColorPelo.NADA) {
             String archivoPelo = "pelo_" + c.getColorPelo() + ".png";
             rutas.add(RAIZ + carpeta + "/" + archivoPelo);
             System.out.println("tengo pelo");

@@ -7,7 +7,7 @@ import AdivinaAdivinador.Personajes.Personaje;
 import AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto;
 import AdivinaAdivinador.Preguntas.CreadorDeListaDePreguntas;
 import AdivinaAdivinador.Preguntas.Pregunta;
-
+import AdivinaAdivinador.View.GameView;
 import java.util.List;
 
 import java.util.ArrayList;
@@ -43,6 +43,8 @@ public class Juego {
         Jugador jugador1;
         if (modo == 1) {
             jugador1 = new JugadorHumano(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, sistema);
+            GameView gameView = new GameView(personajeSecretoJugador1, personajes);
+
         }
         else{
             jugador1 = new JugadorMaquina(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1);

@@ -2,7 +2,7 @@ package AdivinaAdivinador.Personajes;
 
 public class Caracteristicas {
 
-    public enum ColorPelo {NEGRO, RUBIO, ROJO, NADA}
+    public enum ColorPelo {NEGRO, RUBIO, ROJO, MARRON,NADA}
     public enum Genero {HOMBRE, MUJER}
 
     private final boolean esCalvo;
