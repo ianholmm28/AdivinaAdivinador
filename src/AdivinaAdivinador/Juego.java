@@ -1,7 +1,7 @@
 package AdivinaAdivinador;
 import AdivinaAdivinador.Jugadores.Jugador;
 import AdivinaAdivinador.Jugadores.JugadorHumano;
-import AdivinaAdivinador.Jugadores.JugadorMaquina;
+import AdivinaAdivinador.Jugadores.JugadorMaquinaSegura;
 import AdivinaAdivinador.Personajes.CreadorDeListaDePersonajes;
 import AdivinaAdivinador.Personajes.Personaje;
 import AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto;
@@ -49,10 +49,10 @@ public class Juego {
             jugador1 = new JugadorHumano(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, sistema, comparadorDePreguntas);
         }
         else{
-            jugador1 = new JugadorMaquina(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, comparadorDePreguntas);
+            jugador1 = new JugadorMaquinaSegura(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, comparadorDePreguntas);
         }
 
-        Jugador jugador2 = new JugadorMaquina(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador2, comparadorDePreguntas);
+        Jugador jugador2 = new JugadorMaquinaSegura(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador2, comparadorDePreguntas);
 
         boolean juegoTerminado = false;
         Jugador ganador = null;

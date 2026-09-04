@@ -30,6 +30,8 @@ public abstract class Jugador {
 
     public ArrayList<Pregunta> getPreguntasDisponibles() {return preguntasDisponibles;}
 
+    public ComparadorDePreguntas getComparadorDePreguntas() {return comparadorDePreguntas;}
+
     public abstract Personaje adivinarPersonaje();
 
     public abstract Pregunta elegirPregunta();
