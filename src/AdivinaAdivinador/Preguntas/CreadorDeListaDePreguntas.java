@@ -18,6 +18,9 @@ public class CreadorDeListaDePreguntas {
         preguntas.add(new Pregunta("¿Mi personaje tiene remera azul?", TiposDePregunta.REMERA_AZUL));
         preguntas.add(new Pregunta("¿Mi personaje tiene remera roja?", TiposDePregunta.REMERA_ROJA));
         preguntas.add(new Pregunta("¿Mi personaje tiene remera verde?", TiposDePregunta.REMERA_VERDE));
+        preguntas.add(new Pregunta("¿Mi personaje tiene remera amarilla?", TiposDePregunta.REMERA_AMARILLA));
+        preguntas.add(new Pregunta("¿Mi personaje tiene remera lila?", TiposDePregunta.REMERA_LILA));
+        preguntas.add(new Pregunta("¿Mi personaje usa gorro?", TiposDePregunta.GORRO));
 
         return preguntas;
     }
