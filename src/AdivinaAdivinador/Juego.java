@@ -1,7 +1,7 @@
 package AdivinaAdivinador;
 import AdivinaAdivinador.Jugadores.Jugador;
 import AdivinaAdivinador.Jugadores.JugadorHumano;
-import AdivinaAdivinador.Jugadores.JugadorMaquinaSegura;
+import AdivinaAdivinador.Jugadores.JugadorMaquina;
 import AdivinaAdivinador.Personajes.CreadorDeListaDePersonajes;
 import AdivinaAdivinador.Personajes.Personaje;
 import AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto;
@@ -44,15 +44,18 @@ public class Juego {
         Personaje personajeSecretoJugador1 = selectorDePersonajeSecreto.seleccionar(personajes);
         Personaje personajeSecretoJugador2 = selectorDePersonajeSecreto.seleccionar(personajes);
 
+        System.out.println("Modo de Juego: Humano vs Maquina. Elegi a tu rival:\n- 1: Maquina Segura\n- 2: Maquina Arriesgada");
+        JugadorMaquina.Personalidad personalidad = sistema.ingresarInt(1,2) == 1 ? JugadorMaquina.Personalidad.SEGURA : JugadorMaquina.Personalidad.ARRIESGADA;
+
         Jugador jugador1;
         if (modo == 1) {
             jugador1 = new JugadorHumano(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, sistema, comparadorDePreguntas);
         }
         else{
-            jugador1 = new JugadorMaquinaSegura(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, comparadorDePreguntas);
+            jugador1 = new JugadorMaquina(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, comparadorDePreguntas, personalidad);
         }
 
-        Jugador jugador2 = new JugadorMaquinaSegura(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador2, comparadorDePreguntas);
+        Jugador jugador2 = new JugadorMaquina(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador2, comparadorDePreguntas, personalidad);
 
         boolean juegoTerminado = false;
         Jugador ganador = null;
