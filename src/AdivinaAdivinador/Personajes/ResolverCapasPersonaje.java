@@ -31,8 +31,13 @@ public class ResolverCapasPersonaje {
             rutas.add(RAIZ + "Anteojos/anteojos" + valor + ".png");
         }
         if(c.usaGorro()){
-            valor = random.nextInt(1, 3);
-            rutas.add(RAIZ + "Anteojos/Sombrero" + valor + ".png");
+            if(c.getGenero() == Caracteristicas.Genero.HOMBRE){
+                valor = random.nextInt(1, 4);
+                rutas.add(RAIZ + "Sombrero/sombrero" + valor + ".png");
+            }
+            else{
+                rutas.add(RAIZ + "Sombrero/sombrero3.png");
+            }
         }
 
         

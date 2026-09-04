@@ -46,13 +46,10 @@ public class Juego {
 
         Jugador jugador1;
         if (modo == 1) {
-<<<<<<< HEAD
-            jugador1 = new JugadorHumano(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, sistema);
+            jugador1 = new JugadorHumano(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, sistema, comparadorDePreguntas);
             GameView gameView = new GameView(personajeSecretoJugador1, personajes);
 
-=======
-            jugador1 = new JugadorHumano(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, sistema, comparadorDePreguntas);
->>>>>>> origin/main
+
         }
         else{
             jugador1 = new JugadorMaquina(new ArrayList<>(personajes), new ArrayList<>(preguntas), personajeSecretoJugador1, comparadorDePreguntas);
