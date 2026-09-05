@@ -1,16 +1,16 @@
 package AdivinaAdivinador;
+
 import AdivinaAdivinador.Algoritmos.AlgoritmoMergeSort;
+import AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego;
+import AdivinaAdivinador.FlujoDeJuego.Juego;
 import AdivinaAdivinador.Personajes.*;
-import AdivinaAdivinador.Preguntas.ComparadorDePreguntas;
-import AdivinaAdivinador.Preguntas.CreadorDeListaDePreguntas;
+import AdivinaAdivinador.Preguntas.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
         Sistema sistema = new Sistema();
-
-        AlgoritmoMergeSort mergeSort = new AlgoritmoMergeSort();
 
         ProveedorDeNombres proveedorDeNombres = new ProveedorDeNombres(ListaDeNombres.nombresMasculinos(), ListaDeNombres.nombresFemeninos());
 
@@ -20,16 +20,19 @@ public class Main {
 
         ComparadorDePersonajes comparadorDePersonajes = new ComparadorDePersonajes();
 
-        CreadorDeListaDePersonajes creadorDeListaDePersonajes = new CreadorDeListaDePersonajes(creadorDePersonaje, comparadorDePersonajes, mergeSort);
+        AlgoritmoMergeSort mergeSort = new AlgoritmoMergeSort();
 
-        SelectorDePersonajeSecreto selectorDePersonajeSecreto = new SelectorDePersonajeSecreto();
+        CreadorDeListaDePersonajes creadorDeListaDePersonajes = new CreadorDeListaDePersonajes(creadorDePersonaje, comparadorDePersonajes, mergeSort);
 
         CreadorDeListaDePreguntas creadorDeListaDePreguntas = new CreadorDeListaDePreguntas();
 
+        SelectorDePersonajeSecreto selectorDePersonajeSecreto = new SelectorDePersonajeSecreto();
+
         ComparadorDePreguntas comparadorDePreguntas = new ComparadorDePreguntas();
 
-        Juego juego = new Juego(sistema, creadorDeListaDePersonajes, creadorDeListaDePreguntas, selectorDePersonajeSecreto, comparadorDePreguntas);
+        CreadorDeJuego creadorDeJuego = new CreadorDeJuego(sistema, creadorDeListaDePersonajes, creadorDeListaDePreguntas, selectorDePersonajeSecreto, comparadorDePreguntas);
 
+        Juego juego = creadorDeJuego.crearJuego();
         juego.jugarJuego();
     }
 }

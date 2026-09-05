@@ -14,6 +14,5 @@ public class Personaje {
     public Caracteristicas getCaracteristicas(){return caracteristicas;}
 
     @Override
-    public String toString() {return "Nombre: " + nombre + " | " + caracteristicas;
-    }
+    public String toString() {return "Nombre: " + nombre + " | " + caracteristicas;}
 }
