@@ -1,11 +1,9 @@
 package AdivinaAdivinador.Jugadores;
-import AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego;
 import AdivinaAdivinador.Personajes.Personaje;
 import AdivinaAdivinador.Preguntas.ComparadorDePreguntas;
 import AdivinaAdivinador.Preguntas.Pregunta;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public abstract class Jugador {
 

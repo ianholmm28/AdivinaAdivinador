@@ -16,7 +16,12 @@ public class JugadorHumano extends Jugador{
 
     @Override public int elegirOpcion() {
         System.out.println("=== TURNO DE " + getNombre() + " ===\n- 1: Elegir Pregunta\n- 2: Adivinar Personaje");
-        return sistema.ingresarInt(1, 2);
+        int opcion = sistema.ingresarInt(1, 2);
+        while (opcion == 1 && getPreguntasDisponibles().isEmpty()){
+            System.out.println("No quedan pregunta disponibles. Elegi otra opcion.");
+            opcion = sistema.ingresarInt(1, 2);
+        }
+        return opcion;
     }
 
     @Override public Pregunta elegirPregunta() {

@@ -12,7 +12,6 @@ import AdivinaAdivinador.Preguntas.Pregunta;
 import AdivinaAdivinador.Sistema;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class CreadorDeJuego {
 

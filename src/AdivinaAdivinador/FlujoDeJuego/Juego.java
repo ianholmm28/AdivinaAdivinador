@@ -33,7 +33,7 @@ public class Juego {
                 jugadorActual = jugador1;
                 jugadorOpuesto = jugador2;
                 //Debug
-                System.out.println("\n=== PERSONAJES DEL JUGADOR HUMANO ===");
+                System.out.println("\n=== PERSONAJES DE " + jugadorActual.getNombre() + " ===");
                 for (Personaje personaje : jugador1.getPersonajesDisponibles()) {
                     System.out.println(personaje);
                 }
@@ -42,7 +42,7 @@ public class Juego {
                 jugadorActual = jugador2;
                 jugadorOpuesto = jugador1;
                 //Debug
-                System.out.println("\n=== PERSONAJES DE MAQUINA ===");
+                System.out.println("\n=== PERSONAJES DE " + jugadorActual.getNombre() + " ===");
                 for (Personaje personaje : jugador2.getPersonajesDisponibles()) {
                     System.out.println(personaje);
                 }
