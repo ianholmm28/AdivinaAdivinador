@@ -14,34 +14,68 @@ public class JugadorMaquina extends Jugador {
     private final AlgoritmoGreedy greedy = new AlgoritmoGreedy();
     private final CreadorDeJuego.Personalidad personalidad;
 
-    public JugadorMaquina(ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles, Personaje personajeSecreto,
+    public JugadorMaquina(String nombre, ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles, Personaje personajeSecreto,
                           ComparadorDePreguntas comparadorDePreguntas, CreadorDeJuego.Personalidad personalidad) {
-        super(personajes, preguntasDisponibles, personajeSecreto, comparadorDePreguntas);
+        super(nombre, personajes, preguntasDisponibles, personajeSecreto, comparadorDePreguntas);
         this.personalidad = personalidad;
+    }
+
+    private float obtenerUmbral(int cantidadPersonajes) {
+        float umbral = 0;
+        if (personalidad == CreadorDeJuego.Personalidad.ARRIESGADA) {
+            switch (cantidadPersonajes) {
+                case 2, 3:
+                    umbral = 1f;
+                    break;
+                case 4:
+                    umbral = 0.8f;
+                    break;
+                case 5:
+                    umbral = 0.5f;
+                    break;
+                case 6:
+                    umbral = 0.2f;
+                    break;
+            }
+        }
+        else{
+            switch (cantidadPersonajes){
+                case 2:
+                    umbral = 1f;
+                    break;
+                case 3:
+                    umbral = 0.3f;
+                    break;
+                case 4:
+                    umbral = 0.05f;
+                    break;
+            }
+        }
+        return umbral;
     }
 
     @Override
     public int elegirOpcion() {
-        int cantidadPersonajes = getPersonajes().size();
-        if (cantidadPersonajes <= 2) {
+        System.out.println("=== TURNO DE " + getNombre() + " ===");
+        if (Math.random() < obtenerUmbral(getPersonajesDisponibles().size())) {
+            System.out.println("Elegi adivinar.");
             return 2;
         }
-        if (personalidad == CreadorDeJuego.Personalidad.ARRIESGADA && cantidadPersonajes <= 4 && Math.random() < 0.5) {
-            return 2;
-        }
+        System.out.println("Elegi hacer pregunta.");
         return 1;
     }
 
     @Override
     public Pregunta elegirPregunta() {
-        Pregunta mejorPregunta = greedy.elegirMejorPregunta(getPersonajes(), getPreguntasDisponibles(), getComparadorDePreguntas());
+        Pregunta mejorPregunta = greedy.elegirMejorPregunta(getPersonajesDisponibles(), getPreguntasDisponibles(), getComparadorDePreguntas());
         getPreguntasDisponibles().remove(mejorPregunta);
         return mejorPregunta;
     }
 
     @Override
     public Personaje adivinarPersonaje() {
-        // Lo hago después
-        return null;
+        ArrayList<Personaje> personajesDisponibles = getPersonajesDisponibles();
+        Personaje personajeElegido = personajesDisponibles.get(random.nextInt(0, getPersonajesDisponibles().size()));
+        return personajeElegido;
     }
 }

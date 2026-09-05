@@ -6,8 +6,6 @@ import AdivinaAdivinador.FlujoDeJuego.Juego;
 import AdivinaAdivinador.Personajes.*;
 import AdivinaAdivinador.Preguntas.*;
 
-import java.util.ArrayList;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -35,6 +33,6 @@ public class Main {
         CreadorDeJuego creadorDeJuego = new CreadorDeJuego(sistema, creadorDeListaDePersonajes, creadorDeListaDePreguntas, selectorDePersonajeSecreto, comparadorDePreguntas);
 
         Juego juego = creadorDeJuego.crearJuego();
-        juego.jugarJuego;
+        juego.jugarJuego();
     }
 }

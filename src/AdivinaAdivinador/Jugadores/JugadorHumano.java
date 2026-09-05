@@ -9,13 +9,13 @@ public class JugadorHumano extends Jugador{
 
     private final Sistema sistema;
 
-    public JugadorHumano(ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles, Personaje personajeSecreto, Sistema sistema, ComparadorDePreguntas comparadorDePreguntas) {
-        super(personajes, preguntasDisponibles, personajeSecreto, comparadorDePreguntas);
+    public JugadorHumano(String nombre, ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles, Personaje personajeSecreto, Sistema sistema, ComparadorDePreguntas comparadorDePreguntas) {
+        super(nombre, personajes, preguntasDisponibles, personajeSecreto, comparadorDePreguntas);
         this.sistema = sistema;
     }
 
     @Override public int elegirOpcion() {
-        System.out.println("=== Turno del Jugador 1 ===\n- 1: Elegir Pregunta\n- 2: Adivinar Personaje");
+        System.out.println("=== TURNO DE " + getNombre() + " ===\n- 1: Elegir Pregunta\n- 2: Adivinar Personaje");
         return sistema.ingresarInt(1, 2);
     }
 
@@ -33,10 +33,11 @@ public class JugadorHumano extends Jugador{
 
     @Override public Personaje adivinarPersonaje() {
         System.out.println("=== Personajes disponibles ===");
-        for (int i = 0; i < getPersonajes().size(); i++) {
-            System.out.println((i + 1) + ": " + getPersonajes().get(i).getNombre());
+        ArrayList<Personaje> disponibles = getPersonajesDisponibles();
+        for (int i = 0; i < disponibles.size(); i++) {
+            System.out.println((i + 1) + ": " + disponibles.get(i).getNombre());
         }
-        int personajeElegido = sistema.ingresarInt(1, getPersonajes().size());
-        return getPersonajes().get(personajeElegido - 1);
+        int personajeElegido = sistema.ingresarInt(1, disponibles.size());
+        return disponibles.get(personajeElegido - 1);
     }
 }

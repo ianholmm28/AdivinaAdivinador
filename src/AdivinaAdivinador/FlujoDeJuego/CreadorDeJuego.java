@@ -12,6 +12,7 @@ import AdivinaAdivinador.Preguntas.Pregunta;
 import AdivinaAdivinador.Sistema;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CreadorDeJuego {
 
@@ -32,7 +33,7 @@ public class CreadorDeJuego {
     }
 
     private Modo elegirModo(){
-        System.out.println("Bienvenido a AdivinaAdivinador Selecciona el modo de juego:\n- 1: Humano vs Maquina\n- 2: Maquina vs Maquina");
+        System.out.println("\nBienvenido a AdivinaAdivinador Selecciona el modo de juego:\n- 1: Humano vs Maquina\n- 2: Maquina vs Maquina");
         Modo modo = sistema.ingresarInt(1,2) == 1 ? Modo.HUMANO_VS_MAQUINA : Modo.MAQUINA_VS_MAQUINA;
         System.out.println("----------");
         return modo;
@@ -53,11 +54,12 @@ public class CreadorDeJuego {
         ArrayList<Pregunta> preguntas = creadorDeListaDePreguntas.crearPreguntas();
 
         Modo modo = elegirModo();
-        Jugador jugador1 = modo == Modo.HUMANO_VS_MAQUINA ? new JugadorHumano(personajes, preguntas, selectorDePersonajeSecreto.seleccionar(personajes), sistema, comparadorDePreguntas) :
-                                       new JugadorMaquina(personajes, preguntas, selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, Personalidad.SEGURA);
+        Jugador jugador1 = modo == Modo.HUMANO_VS_MAQUINA ? new JugadorHumano("HUMANO", personajes, new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), sistema, comparadorDePreguntas) :
+                                       new JugadorMaquina("MAQUINA SEGURA", personajes, new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, Personalidad.SEGURA);
 
         Personalidad personalidad = elegirPersonalidadMaquina(modo);
-        Jugador jugador2 = new JugadorMaquina(personajes, preguntas, selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad);
+        String nombreJugador2 = "MAQUINA " + personalidad;
+        Jugador jugador2 = new JugadorMaquina(nombreJugador2, new ArrayList<>(personajes), new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad);
 
         return new Juego(jugador1, jugador2, comparadorDePreguntas);
     }
