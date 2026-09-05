@@ -10,22 +10,26 @@ public class ResolverCapasPersonaje {
     int valor;
     
     public List<String> obtenerRutas(Personaje personaje) {
-        Random random = new Random();
+        Random random = new Random(personaje.getNombre().hashCode());
         List<String> rutas = new ArrayList<>();
         Caracteristicas c = personaje.getCaracteristicas();
+        valor = random.nextInt(1, 3);
         String carpeta = (c.getGenero() == Caracteristicas.Genero.HOMBRE) ? "Hombre" : "Mujer";
 
-        rutas.add(RAIZ + carpeta + "/" + (c.getGenero() == Caracteristicas.Genero.HOMBRE ? "pelado.png" : "pelada.png"));
+        rutas.add(RAIZ + carpeta + "/" + (c.getGenero() == Caracteristicas.Genero.HOMBRE ? "pelado1.png" : "pelada"+valor+".png"));
 
         if (!c.esCalvo()) {
             String archivoPelo = "pelo_" + c.getColorPelo() + ".png";
             rutas.add(RAIZ + carpeta + "/" + archivoPelo);
         }
         rutas.add(RAIZ + "Remeras/" + c.getColorRemera()+".png");
-        if(c.tieneBarba()){
+        
+        //Falta poner las barbas de mi abuelo como las pastillas del abuelo pero con barba XD
+        // :v
+        /*if(c.tieneBarba()){
             String archivoPelo = "barba_" + c.getColorPelo() + ".png";
             rutas.add(RAIZ + carpeta + "/" + archivoPelo);
-          }
+          }*/
         if(c.usaLentes()){
             valor = random.nextInt(1, 3);
             rutas.add(RAIZ + "Anteojos/anteojos" + valor + ".png");

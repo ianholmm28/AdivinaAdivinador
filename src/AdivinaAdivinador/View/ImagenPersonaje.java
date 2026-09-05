@@ -63,4 +63,8 @@ public class ImagenPersonaje extends JPanel {
             g2.drawImage(capa, 0, 0, w, h, this);
         }
     }
+    
+    public List<BufferedImage> getCapas() {
+        return capas;
+    }
 }
