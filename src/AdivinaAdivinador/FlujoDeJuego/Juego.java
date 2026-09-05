@@ -19,56 +19,38 @@ public class Juego {
         this.comparadorDePreguntas = comparadorDePreguntas;
     }
 
-    public void jugarJuego() {
+    public Jugador getJugador1() { return jugador1; }
+    public Jugador getJugador2() { return jugador2; }
 
-        boolean juegoTerminado = false;
-        Jugador ganador = null;
-        boolean turnoJugador1 = random.nextBoolean();
+    public boolean humanoHacePregunta(Pregunta preguntaElegida) {
+        boolean resultado = comparadorDePreguntas.coincideCon(jugador2.getPersonajeSecreto(), preguntaElegida);
+        jugador1.eliminarPersonajes(preguntaElegida, resultado);
+        return resultado;
+    }
 
-        while (!juegoTerminado) {
-            turnoJugador1 = !turnoJugador1;
-            Jugador jugadorActual;
-            Jugador jugadorOpuesto;
-            if (turnoJugador1) {
-                jugadorActual = jugador1;
-                jugadorOpuesto = jugador2;
-                //Debug
-                System.out.println("\n=== PERSONAJES DE " + jugadorActual.getNombre() + " ===");
-                for (Personaje personaje : jugador1.getPersonajesDisponibles()) {
-                    System.out.println(personaje);
-                }
-                System.out.println("PERSONAJE SECRETO DEL JUGADOR HUMANO:" + jugador1.getPersonajeSecreto());
+    public boolean humanoAdivinaPersonaje(Personaje personajeElegido) {
+        return personajeElegido.equals(jugador2.getPersonajeSecreto());
+    }
+
+    public String turnoMaquina() {
+        return turnoCualquierMaquina(jugador2, jugador1);
+    }
+
+    public String turnoCualquierMaquina(Jugador actual, Jugador opuesto) {
+        int opcion = actual.elegirOpcion();
+        if (opcion == 1) {
+            Pregunta pregunta = actual.elegirPregunta();
+            boolean resultado = comparadorDePreguntas.coincideCon(opuesto.getPersonajeSecreto(), pregunta);
+            actual.eliminarPersonajes(pregunta, resultado);
+            return actual.getNombre() + " pregunta: " + pregunta.getTexto() + "\nLa respuesta automática fue: " + (resultado ? "Sí" : "No");
+        } else {
+            Personaje personajeElegido = actual.adivinarPersonaje();
+            if (personajeElegido.equals(opuesto.getPersonajeSecreto())) {
+                return "MAQUINA_GANA:" + actual.getNombre() + ":" + personajeElegido.getNombre();
             } else {
-                jugadorActual = jugador2;
-                jugadorOpuesto = jugador1;
-                //Debug
-                System.out.println("\n=== PERSONAJES DE " + jugadorActual.getNombre() + " ===");
-                for (Personaje personaje : jugador2.getPersonajesDisponibles()) {
-                    System.out.println(personaje);
-                }
-                System.out.println("PERSONAJE SECRETO DE MAQUINA:" + jugador2.getPersonajeSecreto());
+                actual.getPersonajesDescartados().add(personajeElegido);
+                return actual.getNombre() + " intentó adivinar a " + personajeElegido.getNombre() + " y falló.";
             }
-                boolean resultado = false;
-                int opcion = jugadorActual.elegirOpcion();
-                if (opcion == 1) {
-                    Pregunta preguntaElegida = jugadorActual.elegirPregunta();
-                    System.out.println(jugadorActual.getNombre() + ": " + preguntaElegida.getTexto());
-                    resultado = comparadorDePreguntas.coincideCon(jugadorActual.getPersonajeSecreto(), preguntaElegida);
-                    jugadorActual.eliminarPersonajes(preguntaElegida, resultado);
-                } else {
-                    Personaje personajeElegido = jugadorActual.adivinarPersonaje();
-                    System.out.println(jugadorActual.getNombre() + ": ¿Mi personaje es " + personajeElegido.getNombre() + "?");
-                    if (personajeElegido.equals(jugadorActual.getPersonajeSecreto())) {
-                        resultado = true;
-                        ganador = jugadorActual;
-                        juegoTerminado = true;
-                    } else {
-                        jugadorActual.getPersonajesDescartados().add(personajeElegido);
-                    }
-                }
-                String respuesta = resultado == true ? "Sí" : "No";
-                System.out.println(jugadorOpuesto.getNombre() + ": " + respuesta);
-            }
-        System.out.println("El ganador es " + ganador.getNombre() + ".");
         }
     }
+}

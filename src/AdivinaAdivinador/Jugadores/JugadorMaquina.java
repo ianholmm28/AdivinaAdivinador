@@ -57,7 +57,7 @@ public class JugadorMaquina extends Jugador {
     @Override
     public int elegirOpcion() {
         System.out.println("=== TURNO DE " + getNombre() + " ===");
-        if (Math.random() < obtenerUmbral(getPersonajesDisponibles().size())) {
+        if (Math.random() < obtenerUmbral(getPersonajesDisponibles().size()) || personalidad == CreadorDeJuego.Personalidad.LOCA) {
             System.out.println("Elegi adivinar.");
             return 2;
         }

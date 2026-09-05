@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 public class CreadorDeJuego {
 
-    enum Modo {HUMANO_VS_MAQUINA, MAQUINA_VS_MAQUINA}
-    public enum Personalidad {SEGURA, ARRIESGADA};
+    public enum Modo {HUMANO_VS_MAQUINA, MAQUINA_VS_MAQUINA}
+    public enum Personalidad {SEGURA, ARRIESGADA, LOCA};
     private final Sistema sistema;
     private final CreadorDeListaDePersonajes creadorDeListaDePersonajes;
     private final CreadorDeListaDePreguntas creadorDeListaDePreguntas;
@@ -31,34 +31,15 @@ public class CreadorDeJuego {
         this.comparadorDePreguntas = comparadorDePreguntas;
     }
 
-    private Modo elegirModo(){
-        System.out.println("\nBienvenido a AdivinaAdivinador Selecciona el modo de juego:\n- 1: Humano vs Maquina\n- 2: Maquina vs Maquina");
-        Modo modo = sistema.ingresarInt(1,2) == 1 ? Modo.HUMANO_VS_MAQUINA : Modo.MAQUINA_VS_MAQUINA;
-        System.out.println("----------");
-        return modo;
-    }
-
-    private Personalidad elegirPersonalidadMaquina(Modo modo){
-        Personalidad personalidad = Personalidad.ARRIESGADA;
-        if (modo == Modo.HUMANO_VS_MAQUINA){
-            System.out.println("Selecciona la personalidad de la maquina:\n- 1: Segura\n- 2: Arriesgada");
-            personalidad = sistema.ingresarInt(1,2) == 1 ? Personalidad.SEGURA : Personalidad.ARRIESGADA;
-            System.out.println("----------");
-        }
-        return personalidad;
-    }
-
-    public Juego crearJuego() {
+    public Juego crearJuego(Modo modo, Personalidad personalidad1, Personalidad personalidad2) {
         ArrayList<Personaje> personajes = creadorDeListaDePersonajes.generarPersonajes(23);
         ArrayList<Pregunta> preguntas = creadorDeListaDePreguntas.crearPreguntas();
 
-        Modo modo = elegirModo();
         Jugador jugador1 = modo == Modo.HUMANO_VS_MAQUINA ? new JugadorHumano("HUMANO", personajes, new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), sistema, comparadorDePreguntas) :
-                                       new JugadorMaquina("MAQUINA SEGURA", personajes, new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, Personalidad.SEGURA);
+                                       new JugadorMaquina("MAQUINA " + personalidad1, personajes, new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad1);
 
-        Personalidad personalidad = elegirPersonalidadMaquina(modo);
-        String nombreJugador2 = "MAQUINA " + personalidad;
-        Jugador jugador2 = new JugadorMaquina(nombreJugador2, new ArrayList<>(personajes), new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad);
+        String nombreJugador2 = "MAQUINA " + personalidad2;
+        Jugador jugador2 = new JugadorMaquina(nombreJugador2, new ArrayList<>(personajes), new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad2);
 
         return new Juego(jugador1, jugador2, comparadorDePreguntas);
     }

@@ -8,16 +8,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.net.URL;
 import java.util.List;
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.Timer;
 
-public class GameTile extends JButton implements ActionListener {
+public class GameTile extends JButton {
     private final ImagenPersonaje imagenAdelante;
     
     private boolean isEliminated = false;
@@ -32,16 +27,17 @@ public class GameTile extends JButton implements ActionListener {
         setBorderPainted(true);
         setContentAreaFilled(false);
         setMargin(new Insets(0,0,0,0));
-        
-        addActionListener(this);
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        isEliminated = !isEliminated;
+    
+    public void setEliminated(boolean eliminated) {
+        this.isEliminated = eliminated;
         repaint();
     }
     
+    public Personaje getPersonaje() {
+        return personaje;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
