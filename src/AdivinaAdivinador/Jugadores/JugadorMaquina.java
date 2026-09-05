@@ -24,7 +24,7 @@ public class JugadorMaquina extends Jugador {
         float umbral = 0;
         if (personalidad == CreadorDeJuego.Personalidad.ARRIESGADA) {
             switch (cantidadPersonajes) {
-                case 2, 3:
+                case 1, 2, 3:
                     umbral = 1f;
                     break;
                 case 4:
@@ -40,7 +40,7 @@ public class JugadorMaquina extends Jugador {
         }
         else{
             switch (cantidadPersonajes){
-                case 2:
+                case 1, 2:
                     umbral = 1f;
                     break;
                 case 3:
@@ -75,7 +75,6 @@ public class JugadorMaquina extends Jugador {
     @Override
     public Personaje adivinarPersonaje() {
         ArrayList<Personaje> personajesDisponibles = getPersonajesDisponibles();
-        Personaje personajeElegido = personajesDisponibles.get(random.nextInt(0, getPersonajesDisponibles().size()));
-        return personajeElegido;
+        return getPersonajesDisponibles().get(random.nextInt(personajesDisponibles.size()));
     }
 }
