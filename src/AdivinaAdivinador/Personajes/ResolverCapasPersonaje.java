@@ -24,12 +24,10 @@ public class ResolverCapasPersonaje {
         }
         rutas.add(RAIZ + "Remeras/" + c.getColorRemera()+".png");
         
-        //Falta poner las barbas de mi abuelo como las pastillas del abuelo pero con barba XD
-        // :v
-        /*if(c.tieneBarba()){
+        if(c.tieneBarba()){
             String archivoPelo = "barba_" + c.getColorPelo() + ".png";
             rutas.add(RAIZ + carpeta + "/" + archivoPelo);
-          }*/
+          }
         if(c.usaLentes()){
             valor = random.nextInt(1, 3);
             rutas.add(RAIZ + "Anteojos/anteojos" + valor + ".png");

@@ -12,18 +12,20 @@ public class MenuView extends JFrame {
         setLocationRelativeTo(null);
         
         JPanel panel = new JPanel(new GridLayout(3, 1, 10, 20));
-        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-        panel.setBackground(new Color(50, 50, 80)); // Azul oscuro
+        panel.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
+        panel.setBackground(new Color(35, 40, 50)); // Gris oscuro moderno
         
         JLabel titulo = new JLabel("ADIVINA ADIVINADOR", SwingConstants.CENTER);
-        titulo.setFont(new Font("Arial", Font.BOLD, 24));
-        titulo.setForeground(Color.WHITE);
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 26));
+        titulo.setForeground(new Color(240, 240, 240));
         
         JButton btnHvM = new JButton("Humano vs Máquina");
-        btnHvM.setFont(new Font("Arial", Font.BOLD, 18));
-        btnHvM.setBackground(new Color(70, 130, 180));
+        btnHvM.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        btnHvM.setBackground(new Color(41, 128, 185)); // Azul flat
         btnHvM.setForeground(Color.WHITE);
         btnHvM.setFocusPainted(false);
+        btnHvM.setBorderPainted(false);
+        btnHvM.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnHvM.addActionListener(e -> {
             String[] opciones = {"Segura", "Arriesgada", "Loca"};
             int seleccion = JOptionPane.showOptionDialog(this, "Elige la personalidad de la máquina:", "Personalidad IA",
@@ -57,22 +59,44 @@ public class MenuView extends JFrame {
             
             AdivinaAdivinador.FlujoDeJuego.Juego nuevoJuego = creadorJuego.crearJuego(AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Modo.HUMANO_VS_MAQUINA, null, personalidad2);
             
-            GameView gvMaquina = new GameView(nuevoJuego, null, nuevoJuego.getJugador2().getPersonajes(), "Tablero de la Máquina", false);
-            gvMaquina.setLocation(50, 50);
-
-            GameView gvHumano = new GameView(nuevoJuego, nuevoJuego.getJugador1().getPersonajeSecreto(), nuevoJuego.getJugador1().getPersonajes(), "Tablero del Jugador Humano", true);
-            gvHumano.setLocation(600, 50);
+            JFrame gameFrame = new JFrame("Adivina Adivinador - Humano vs Máquina");
+            gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            gameFrame.setLayout(new BorderLayout());
+            
+            ChatPanel chatPanel = new ChatPanel(true);
+            chatPanel.setPreferredSize(new Dimension(800, 180));
+            
+            GameView gvMaquina = new GameView(nuevoJuego, null, nuevoJuego.getJugador2().getPersonajes(), "Tablero de la Máquina", false, null);
+            GameView gvHumano = new GameView(nuevoJuego, nuevoJuego.getJugador1().getPersonajeSecreto(), nuevoJuego.getJugador1().getPersonajes(), "Tu Tablero", true, chatPanel);
             
             gvHumano.setVistaOponente(gvMaquina);
+            
+            JPanel boardsPanel = new JPanel(new GridLayout(1, 2));
+            boardsPanel.add(gvMaquina); // Máquina a la izquierda
+            boardsPanel.add(gvHumano);  // Jugador a la derecha
+            
+            gameFrame.add(boardsPanel, BorderLayout.CENTER);
+            
+            JPanel chatContainer = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 10)); // FlowLayout para no estirar ancho
+            chatContainer.setBackground(new Color(41, 128, 185)); // Mismo azul que los tableros
+            chatPanel.setPreferredSize(new Dimension(600, 180)); // Ancho más pequeño
+            chatContainer.add(chatPanel);
+            gameFrame.add(chatContainer, BorderLayout.SOUTH);
+            
+            gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Fullscreen
+            gameFrame.setLocationRelativeTo(null);
+            gameFrame.setVisible(true);
             
             dispose();
         });
         
         JButton btnMvM = new JButton("Máquina vs Máquina");
-        btnMvM.setFont(new Font("Arial", Font.BOLD, 18));
-        btnMvM.setBackground(new Color(220, 20, 60));
+        btnMvM.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        btnMvM.setBackground(new Color(192, 57, 43)); // Rojo flat
         btnMvM.setForeground(Color.WHITE);
         btnMvM.setFocusPainted(false);
+        btnMvM.setBorderPainted(false);
+        btnMvM.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnMvM.addActionListener(e -> {
             String[] opciones = {"Segura", "Arriesgada", "Loca"};
             int selec1 = JOptionPane.showOptionDialog(this, "Elige la personalidad de la MÁQUINA 1:", "IA 1",
@@ -82,6 +106,9 @@ public class MenuView extends JFrame {
             int selec2 = JOptionPane.showOptionDialog(this, "Elige la personalidad de la MÁQUINA 2:", "IA 2",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
             if (selec2 == -1) return;
+
+            int verChat = JOptionPane.showConfirmDialog(this, "¿Deseas ver el chat de las máquinas?", "Ver Chat", JOptionPane.YES_NO_OPTION);
+            boolean showChat = (verChat == JOptionPane.YES_OPTION);
 
             AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad p1 = selec1 == 0 ? AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.SEGURA : (selec1 == 1 ? AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.ARRIESGADA : AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.LOCA);
             AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad p2 = selec2 == 0 ? AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.SEGURA : (selec2 == 1 ? AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.ARRIESGADA : AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.LOCA);
@@ -103,21 +130,45 @@ public class MenuView extends JFrame {
             
             AdivinaAdivinador.FlujoDeJuego.Juego nuevoJuego = creadorJuego.crearJuego(AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Modo.MAQUINA_VS_MAQUINA, p1, p2);
             
-            GameView gv1 = new GameView(nuevoJuego, nuevoJuego.getJugador1().getPersonajeSecreto(), nuevoJuego.getJugador1().getPersonajes(), "Máquina 1 (" + p1 + ")", false);
-            gv1.setLocation(50, 50);
-
-            GameView gv2 = new GameView(nuevoJuego, nuevoJuego.getJugador2().getPersonajeSecreto(), nuevoJuego.getJugador2().getPersonajes(), "Máquina 2 (" + p2 + ")", false);
-            gv2.setLocation(600, 50);
+            JFrame gameFrame = new JFrame("Adivina Adivinador - Máquina vs Máquina");
+            gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            gameFrame.setLayout(new BorderLayout());
+            
+            ChatPanel chatPanel = null;
+            if (showChat) {
+                chatPanel = new ChatPanel(false);
+                chatPanel.setPreferredSize(new Dimension(600, 180));
+                
+                JPanel chatContainer = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 10)); // FlowLayout para no estirar ancho
+                chatContainer.setBackground(new Color(41, 128, 185)); // Mismo azul que los tableros
+                chatContainer.add(chatPanel);
+                gameFrame.add(chatContainer, BorderLayout.SOUTH);
+            }
+            
+            GameView gv1 = new GameView(nuevoJuego, nuevoJuego.getJugador1().getPersonajeSecreto(), nuevoJuego.getJugador1().getPersonajes(), "Máquina 1 (" + p1 + ")", false, null);
+            GameView gv2 = new GameView(nuevoJuego, nuevoJuego.getJugador2().getPersonajeSecreto(), nuevoJuego.getJugador2().getPersonajes(), "Máquina 2 (" + p2 + ")", false, null);
             
             gv1.setVistaOponente(gv2);
             gv2.setVistaOponente(gv1);
+            
+            JPanel boardsPanel = new JPanel(new GridLayout(1, 2));
+            boardsPanel.add(gv1);
+            boardsPanel.add(gv2);
+            gameFrame.add(boardsPanel, BorderLayout.CENTER);
+            
+            gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Fullscreen
+            gameFrame.setLocationRelativeTo(null);
+            gameFrame.setVisible(true);
+            
+            final ChatPanel finalChatPanel = chatPanel;
             
             dispose();
             
             final boolean[] turnoJ1 = {true};
             javax.swing.Timer timer = new javax.swing.Timer(2500, evt -> {
-                String mensaje;
-                if (turnoJ1[0]) {
+                String[] mensaje;
+                boolean isJ1 = turnoJ1[0];
+                if (isJ1) {
                     mensaje = nuevoJuego.turnoCualquierMaquina(nuevoJuego.getJugador1(), nuevoJuego.getJugador2());
                 } else {
                     mensaje = nuevoJuego.turnoCualquierMaquina(nuevoJuego.getJugador2(), nuevoJuego.getJugador1());
@@ -128,13 +179,28 @@ public class MenuView extends JFrame {
                 
                 turnoJ1[0] = !turnoJ1[0];
                 
-                if (mensaje.startsWith("MAQUINA_GANA:")) {
+                if (mensaje[0].startsWith("MAQUINA_GANA:")) {
                     ((javax.swing.Timer)evt.getSource()).stop();
-                    String ganador = mensaje.split(":")[1];
-                    String adivino = mensaje.split(":")[2];
+                    String ganador = mensaje[0].split(":")[1];
+                    String adivino = mensaje[0].split(":")[2];
+                    if (finalChatPanel != null) {
+                        finalChatPanel.addMessage("Sistema", "¡" + ganador + " GANA! Adivinó al personaje: " + adivino, true);
+                    }
                     JOptionPane.showMessageDialog(null, "¡" + ganador + " GANA! Adivinó al personaje: " + adivino);
                 } else {
-                    System.out.println(mensaje);
+                    if (finalChatPanel != null) {
+                        finalChatPanel.addMessage(isJ1 ? "Máquina 1" : "Máquina 2", mensaje[0], isJ1);
+                        if (mensaje.length > 1) {
+                            javax.swing.Timer delay = new javax.swing.Timer(1000, e2 -> {
+                                finalChatPanel.addMessage(isJ1 ? "Máquina 2" : "Máquina 1", mensaje[1], !isJ1);
+                            });
+                            delay.setRepeats(false);
+                            delay.start();
+                        }
+                    } else {
+                        System.out.println(mensaje[0]);
+                        if (mensaje.length > 1) System.out.println(mensaje[1]);
+                    }
                 }
             });
             timer.start();

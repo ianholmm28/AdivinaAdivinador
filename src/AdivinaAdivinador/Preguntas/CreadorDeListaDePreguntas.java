@@ -8,6 +8,7 @@ public class CreadorDeListaDePreguntas {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
 
         preguntas.add(new Pregunta("¿Mi personaje es hombre?", TiposDePregunta.GENERO));
+        preguntas.add(new Pregunta("¿Mi personaje es mujer?", TiposDePregunta.GENERO_MUJER));
         preguntas.add(new Pregunta("¿Mi personaje es calvo?", TiposDePregunta.CALVO));
         preguntas.add(new Pregunta("¿Mi personaje tiene barba?", TiposDePregunta.BARBA));
         preguntas.add(new Pregunta("¿Mi personaje usa lentes?", TiposDePregunta.LENTES));

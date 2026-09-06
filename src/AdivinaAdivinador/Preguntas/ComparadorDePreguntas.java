@@ -9,6 +9,8 @@ public class ComparadorDePreguntas {
         switch (pregunta.getTipo()){
             case GENERO:
                 return personaje.getCaracteristicas().getGenero() == Caracteristicas.Genero.HOMBRE;
+            case GENERO_MUJER:
+                return personaje.getCaracteristicas().getGenero() == Caracteristicas.Genero.MUJER;
             case CALVO:
                 return personaje.getCaracteristicas().esCalvo();
             case BARBA:

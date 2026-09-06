@@ -8,45 +8,37 @@ import AdivinaAdivinador.FlujoDeJuego.Juego;
 import java.util.List;
 import java.util.ArrayList;
 
-public class GameView extends JFrame {
-    public final static int TILE_WIDTH = 100;
-    public final static int TILE_HEIGHT = 145;
+public class GameView extends JPanel {
+    public final static int TILE_WIDTH = 90;
+    public final static int TILE_HEIGHT = 130;
     public final static int WINDOW_WIDTH = TILE_WIDTH * 6 + 150;
     public final static int WINDOW_HEIGHT = TILE_HEIGHT * 4 + 280;
-
-    private class GameQuestions extends JButton {
-        public GameQuestions(String texto) {
-            super(texto);
-            setBackground(new Color(70, 130, 180));
-            setForeground(Color.WHITE);
-            setFont(new Font("Arial", Font.BOLD, 12));
-            setFocusPainted(false);
-        }
-    }
 
     private final Juego juego;
     private GameTile tiles[][];
     private GameView vistaOponente;
     private boolean controlesHumanos;
 
-    public GameView(Juego juego, Personaje personajeSecretoPropio, List<Personaje> personajesTablero, String title, boolean controlesHumanos) {
+    private ChatPanel chatPanel;
+
+    public GameView(Juego juego, Personaje personajeSecretoPropio, List<Personaje> personajesTablero, String title, boolean controlesHumanos, ChatPanel chatPanel) {
         this.juego = juego;
         this.controlesHumanos = controlesHumanos;
-        setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
-        setTitle(title);
-        setUp(personajeSecretoPropio, personajesTablero);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setResizable(true);
-        setVisible(true);
+        this.chatPanel = chatPanel;
+        
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+        
+        setUp(personajeSecretoPropio, personajesTablero, title);
     }
     
     public void setVistaOponente(GameView vistaOponente) {
         this.vistaOponente = vistaOponente;
     }
 
-    private void setUp(Personaje personajeSecretoPropio, List<Personaje> personajesTablero) {
+    private void setUp(Personaje personajeSecretoPropio, List<Personaje> personajesTablero, String title) {
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(new Color(30, 144, 255));
+        mainPanel.setBackground(new Color(41, 128, 185)); // Azul flat moderno
 
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setOpaque(false);
@@ -58,8 +50,15 @@ public class GameView extends JFrame {
         panelSecreto.setLayout(new BoxLayout(panelSecreto, BoxLayout.Y_AXIS));
         panelSecreto.setOpaque(false);
         
+        JLabel labelTitle = new JLabel(title);
+        labelTitle.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        labelTitle.setForeground(Color.YELLOW);
+        labelTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelSecreto.add(labelTitle);
+        panelSecreto.add(Box.createVerticalStrut(5));
+        
         JLabel labelTurno = new JLabel("PERSONAJE SECRETO:");
-        labelTurno.setFont(new Font("Arial", Font.BOLD, 14));
+        labelTurno.setFont(new Font("Segoe UI", Font.BOLD, 16));
         labelTurno.setForeground(Color.WHITE);
         labelTurno.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelSecreto.add(labelTurno);
@@ -111,7 +110,7 @@ public class GameView extends JFrame {
                                 JOptionPane.showMessageDialog(this, "¡GANASTE! El personaje era " + p.getNombre());
                                 System.exit(0);
                             } else {
-                                JOptionPane.showMessageDialog(this, "¡Fallaste! Ese no es el personaje.");
+                                chatPanel.addMessage("Sistema", "¡Fallaste! Ese no es el personaje.", false);
                                 tile.setEliminated(true);
                                 ejecutarTurnoMaquina();
                             }
@@ -125,33 +124,35 @@ public class GameView extends JFrame {
             centerPanel.add(rowPanel);
         }
         centerPanel.add(Box.createVerticalGlue());
+        centerPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0)); // Espacio entre personajes y chat
 
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
 
-        if (controlesHumanos) {
-            JPanel footPanel = new JPanel(new GridLayout(3, 5, 5, 5));
-            footPanel.setOpaque(false);
-            footPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            
-            ArrayList<Pregunta> preguntasDisponibles = juego.getJugador1().getPreguntasDisponibles();
-            
-            for (Pregunta pregunta : preguntasDisponibles) {
-                GameQuestions btnPregunta = new GameQuestions(pregunta.getTexto());
-                btnPregunta.addActionListener(e -> {
+        if (controlesHumanos && chatPanel != null) {
+            chatPanel.setPreguntas(juego.getJugador1().getPreguntasDisponibles());
+            chatPanel.setOnPreguntaEnviada(e -> {
+                Pregunta pregunta = (Pregunta) e.getSource();
+                chatPanel.addMessage("Tú", pregunta.getTexto(), true);
+                chatPanel.setInputEnabled(false);
+                
+                Timer t1 = new Timer(1000, evt1 -> {
                     boolean respuesta = juego.humanoHacePregunta(pregunta);
-                    JOptionPane.showMessageDialog(this, "La Máquina dice: " + (respuesta ? "SÍ" : "NO"));
-                    btnPregunta.setEnabled(false);
-                    
+                    chatPanel.addMessage("Máquina", respuesta ? "SÍ" : "NO", false);
                     actualizarTableros();
-                    ejecutarTurnoMaquina();
+                    
+                    Timer t2 = new Timer(1500, evt2 -> {
+                        ejecutarTurnoMaquina();
+                    });
+                    t2.setRepeats(false);
+                    t2.start();
                 });
-                footPanel.add(btnPregunta);
-            }
-            mainPanel.add(footPanel, BorderLayout.SOUTH);
+                t1.setRepeats(false);
+                t1.start();
+            });
         }
 
-        setContentPane(mainPanel);
+        add(mainPanel, BorderLayout.CENTER);
     }
 
     public void actualizarTableroInterno(List<Personaje> descartados) {
@@ -174,15 +175,25 @@ public class GameView extends JFrame {
     }
 
     private void ejecutarTurnoMaquina() {
-        String mensajeMaquina = juego.turnoMaquina();
-        actualizarTableros(); // Actualizar tableros después del turno de la máquina
+        String[] mensajeMaquina = juego.turnoMaquina();
+        actualizarTableros();
 
-        if (mensajeMaquina.startsWith("MAQUINA_GANA:")) {
-            String nombre = mensajeMaquina.split(":")[1];
+        if (mensajeMaquina[0].startsWith("MAQUINA_GANA:")) {
+            String nombre = mensajeMaquina[0].split(":")[2];
             JOptionPane.showMessageDialog(this, "¡LA MÁQUINA GANA! Adivinó tu personaje: " + nombre);
             System.exit(0);
         } else {
-            JOptionPane.showMessageDialog(this, "TURNO DE LA MÁQUINA:\n" + mensajeMaquina);
+            chatPanel.addMessage("Máquina", mensajeMaquina[0], false);
+            if (mensajeMaquina.length > 1) {
+                Timer t3 = new Timer(1500, evt3 -> {
+                    chatPanel.addMessage("Tú", mensajeMaquina[1], true);
+                    chatPanel.setInputEnabled(true);
+                });
+                t3.setRepeats(false);
+                t3.start();
+            } else {
+                chatPanel.setInputEnabled(true);
+            }
         }
     }
 }

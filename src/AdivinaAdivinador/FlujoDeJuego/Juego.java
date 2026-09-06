@@ -32,24 +32,24 @@ public class Juego {
         return personajeElegido.equals(jugador2.getPersonajeSecreto());
     }
 
-    public String turnoMaquina() {
+    public String[] turnoMaquina() {
         return turnoCualquierMaquina(jugador2, jugador1);
     }
 
-    public String turnoCualquierMaquina(Jugador actual, Jugador opuesto) {
+    public String[] turnoCualquierMaquina(Jugador actual, Jugador opuesto) {
         int opcion = actual.elegirOpcion();
         if (opcion == 1) {
             Pregunta pregunta = actual.elegirPregunta();
             boolean resultado = comparadorDePreguntas.coincideCon(opuesto.getPersonajeSecreto(), pregunta);
             actual.eliminarPersonajes(pregunta, resultado);
-            return actual.getNombre() + " pregunta: " + pregunta.getTexto() + "\nLa respuesta automática fue: " + (resultado ? "Sí" : "No");
+            return new String[] { actual.getNombre() + " pregunta: " + pregunta.getTexto(), resultado ? "SÍ" : "NO" };
         } else {
             Personaje personajeElegido = actual.adivinarPersonaje();
             if (personajeElegido.equals(opuesto.getPersonajeSecreto())) {
-                return "MAQUINA_GANA:" + actual.getNombre() + ":" + personajeElegido.getNombre();
+                return new String[] { "MAQUINA_GANA:" + actual.getNombre() + ":" + personajeElegido.getNombre() };
             } else {
                 actual.getPersonajesDescartados().add(personajeElegido);
-                return actual.getNombre() + " intentó adivinar a " + personajeElegido.getNombre() + " y falló.";
+                return new String[] { actual.getNombre() + " intentó adivinar a " + personajeElegido.getNombre() + " y falló." };
             }
         }
     }
