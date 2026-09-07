@@ -7,17 +7,20 @@ import AdivinaAdivinador.Preguntas.Pregunta;
 import java.util.ArrayList;
 import java.util.Random;
 import AdivinaAdivinador.Algoritmos.AlgoritmoGreedy;
+import AdivinaAdivinador.Utils.Logger;
 
 public class JugadorMaquina extends Jugador {
 
     private final Random random = new Random();
     private final AlgoritmoGreedy greedy = new AlgoritmoGreedy();
     private final CreadorDeJuego.Personalidad personalidad;
+    private final Logger logger;
 
     public JugadorMaquina(String nombre, ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles, Personaje personajeSecreto,
-                          ComparadorDePreguntas comparadorDePreguntas, CreadorDeJuego.Personalidad personalidad) {
+                          ComparadorDePreguntas comparadorDePreguntas, CreadorDeJuego.Personalidad personalidad, Logger logger) {
         super(nombre, personajes, preguntasDisponibles, personajeSecreto, comparadorDePreguntas);
         this.personalidad = personalidad;
+        this.logger = logger;
     }
 
     private float obtenerUmbral(int cantidadPersonajes) {

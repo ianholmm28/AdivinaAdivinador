@@ -11,6 +11,8 @@ import AdivinaAdivinador.Preguntas.CreadorDeListaDePreguntas;
 import AdivinaAdivinador.Preguntas.Pregunta;
 import AdivinaAdivinador.Sistema;
 
+import AdivinaAdivinador.Utils.Logger;
+
 import java.util.ArrayList;
 
 public class CreadorDeJuego {
@@ -22,13 +24,15 @@ public class CreadorDeJuego {
     private final CreadorDeListaDePreguntas creadorDeListaDePreguntas;
     private final SelectorDePersonajeSecreto selectorDePersonajeSecreto;
     private final ComparadorDePreguntas comparadorDePreguntas;
+    private final Logger logger;
 
-    public CreadorDeJuego(Sistema sistema, CreadorDeListaDePersonajes creadorDeListaDePersonajes, CreadorDeListaDePreguntas creadorDeListaDePreguntas, SelectorDePersonajeSecreto selectorDePersonajeSecreto, ComparadorDePreguntas comparadorDePreguntas) {
+    public CreadorDeJuego(Sistema sistema, CreadorDeListaDePersonajes creadorDeListaDePersonajes, CreadorDeListaDePreguntas creadorDeListaDePreguntas, SelectorDePersonajeSecreto selectorDePersonajeSecreto, ComparadorDePreguntas comparadorDePreguntas, Logger logger) {
         this.sistema = sistema;
         this.creadorDeListaDePersonajes = creadorDeListaDePersonajes;
         this.creadorDeListaDePreguntas = creadorDeListaDePreguntas;
         this.selectorDePersonajeSecreto = selectorDePersonajeSecreto;
         this.comparadorDePreguntas = comparadorDePreguntas;
+        this.logger = logger;
     }
 
     public Juego crearJuego(Modo modo, Personalidad personalidad1, Personalidad personalidad2) {
@@ -36,11 +40,11 @@ public class CreadorDeJuego {
         ArrayList<Pregunta> preguntas = creadorDeListaDePreguntas.crearPreguntas();
 
         Jugador jugador1 = modo == Modo.HUMANO_VS_MAQUINA ? new JugadorHumano("HUMANO", personajes, new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), sistema, comparadorDePreguntas) :
-                                       new JugadorMaquina("MAQUINA " + personalidad1, personajes, new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad1);
+                                       new JugadorMaquina("MAQUINA " + personalidad1, personajes, new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad1, logger);
 
         String nombreJugador2 = "MAQUINA " + personalidad2;
-        Jugador jugador2 = new JugadorMaquina(nombreJugador2, new ArrayList<>(personajes), new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad2);
+        Jugador jugador2 = new JugadorMaquina(nombreJugador2, new ArrayList<>(personajes), new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad2, logger);
 
-        return new Juego(jugador1, jugador2, comparadorDePreguntas);
+        return new Juego(jugador1, jugador2, comparadorDePreguntas, logger);
     }
 }

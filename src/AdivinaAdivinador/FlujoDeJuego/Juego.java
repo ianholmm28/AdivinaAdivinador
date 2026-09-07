@@ -3,6 +3,7 @@ import AdivinaAdivinador.Jugadores.Jugador;
 import AdivinaAdivinador.Personajes.Personaje;
 import AdivinaAdivinador.Preguntas.Pregunta;
 import AdivinaAdivinador.Preguntas.ComparadorDePreguntas;
+import AdivinaAdivinador.Utils.Logger;
 
 import java.util.Random;
 
@@ -12,11 +13,13 @@ public class Juego {
     private final Jugador jugador2;
     private final Random random = new Random();
     private final ComparadorDePreguntas comparadorDePreguntas;
+    private final Logger logger;
 
-    public Juego(Jugador jugador1, Jugador jugador2, ComparadorDePreguntas comparadorDePreguntas) {
+    public Juego(Jugador jugador1, Jugador jugador2, ComparadorDePreguntas comparadorDePreguntas, Logger logger) {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.comparadorDePreguntas = comparadorDePreguntas;
+        this.logger = logger;
     }
 
     public Jugador getJugador1() { return jugador1; }

@@ -1,5 +1,7 @@
 package AdivinaAdivinador.View;
 
+import AdivinaAdivinador.Utils.GestorLogs;
+import AdivinaAdivinador.Utils.Logger;
 import javax.swing.*;
 import java.awt.*;
 
@@ -55,7 +57,8 @@ public class MenuView extends JFrame {
             AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto selector = new AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto();
             AdivinaAdivinador.Preguntas.ComparadorDePreguntas compPreg = new AdivinaAdivinador.Preguntas.ComparadorDePreguntas();
             
-            AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego creadorJuego = new AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego(sistema, creadorListaP, creadorListaPreg, selector, compPreg);
+            Logger logger = new GestorLogs("partida.log");
+            AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego creadorJuego = new AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego(sistema, creadorListaP, creadorListaPreg, selector, compPreg, logger);
             
             AdivinaAdivinador.FlujoDeJuego.Juego nuevoJuego = creadorJuego.crearJuego(AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Modo.HUMANO_VS_MAQUINA, null, personalidad2);
             
@@ -126,7 +129,8 @@ public class MenuView extends JFrame {
             AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto selector = new AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto();
             AdivinaAdivinador.Preguntas.ComparadorDePreguntas compPreg = new AdivinaAdivinador.Preguntas.ComparadorDePreguntas();
             
-            AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego creadorJuego = new AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego(sistema, creadorListaP, creadorListaPreg, selector, compPreg);
+            Logger logger = new GestorLogs("partida.log");
+            AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego creadorJuego = new AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego(sistema, creadorListaP, creadorListaPreg, selector, compPreg, logger);
             
             AdivinaAdivinador.FlujoDeJuego.Juego nuevoJuego = creadorJuego.crearJuego(AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Modo.MAQUINA_VS_MAQUINA, p1, p2);
             
