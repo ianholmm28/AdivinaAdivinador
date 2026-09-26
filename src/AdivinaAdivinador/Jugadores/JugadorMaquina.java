@@ -6,18 +6,27 @@ import AdivinaAdivinador.Preguntas.ComparadorDePreguntas;
 import AdivinaAdivinador.Preguntas.Pregunta;
 import java.util.ArrayList;
 import java.util.Random;
-import AdivinaAdivinador.Algoritmos.AlgoritmoGreedy;
+import AdivinaAdivinador.Algoritmos.AlgoritmoGreedySeguro;
+import AdivinaAdivinador.Algoritmos.AlgoritmoGreedyArriesgado;
+
+import AdivinaAdivinador.Algoritmos.IEstrategiaPregunta;
 
 public class JugadorMaquina extends Jugador {
 
     private final Random random = new Random();
-    private final AlgoritmoGreedy greedy = new AlgoritmoGreedy();
+    private final IEstrategiaPregunta estrategiaPregunta;
     private final CreadorDeJuego.Personalidad personalidad;
 
     public JugadorMaquina(String nombre, ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles, Personaje personajeSecreto,
                           ComparadorDePreguntas comparadorDePreguntas, CreadorDeJuego.Personalidad personalidad) {
         super(nombre, personajes, preguntasDisponibles, personajeSecreto, comparadorDePreguntas);
         this.personalidad = personalidad;
+
+        if (personalidad == CreadorDeJuego.Personalidad.ARRIESGADA) {
+            this.estrategiaPregunta = new AlgoritmoGreedyArriesgado();
+        } else {
+            this.estrategiaPregunta = new AlgoritmoGreedySeguro();
+        }
     }
 
     private float obtenerUmbral(int cantidadPersonajes) {
@@ -54,7 +63,6 @@ public class JugadorMaquina extends Jugador {
         return umbral;
     }
 
-    @Override
     public int elegirOpcion() {
         System.out.println("=== TURNO DE " + getNombre() + " ===");
         if (Math.random() < obtenerUmbral(getPersonajesDisponibles().size()) || personalidad == CreadorDeJuego.Personalidad.LOCA) {
@@ -65,14 +73,12 @@ public class JugadorMaquina extends Jugador {
         return 1;
     }
 
-    @Override
     public Pregunta elegirPregunta() {
-        Pregunta mejorPregunta = greedy.elegirMejorPregunta(getPersonajesDisponibles(), getPreguntasDisponibles(), getComparadorDePreguntas());
+        Pregunta mejorPregunta = estrategiaPregunta.elegirMejorPregunta(getPersonajesDisponibles(), getPreguntasDisponibles(), getComparadorDePreguntas());
         getPreguntasDisponibles().remove(mejorPregunta);
         return mejorPregunta;
     }
 
-    @Override
     public Personaje adivinarPersonaje() {
         ArrayList<Personaje> personajesDisponibles = getPersonajesDisponibles();
         return getPersonajesDisponibles().get(random.nextInt(personajesDisponibles.size()));

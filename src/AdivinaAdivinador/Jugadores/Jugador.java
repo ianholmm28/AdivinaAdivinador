@@ -47,11 +47,7 @@ public abstract class Jugador {
 
     public ComparadorDePreguntas getComparadorDePreguntas() {return comparadorDePreguntas;}
 
-    public abstract Personaje adivinarPersonaje();
 
-    public abstract Pregunta elegirPregunta();
-
-    public abstract int elegirOpcion();
 
     public void eliminarPersonajes(Pregunta pregunta, boolean respuesta) {
         for (Personaje personaje : personajes) {
