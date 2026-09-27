@@ -1,14 +1,13 @@
-=== NUEVA PARTIDA (26/09/2026 20:01:42) ===
-[20:01:42] MODO: Máquina vs Máquina
-[20:01:42] Personalidad Máquina 1: ARRIESGADA
-[20:01:42] Personalidad Máquina 2: SEGURA
-[20:01:42] Personaje Secreto J1 (MAQUINA ARRIESGADA): Pedro
-[20:01:42] Personaje Secreto J2 (MAQUINA SEGURA): Diego
-[20:01:45] MAQUINA ARRIESGADA pregunta: '¿Mi personaje tiene remera azul?' -> Respuesta: NO
-[20:01:48] MAQUINA SEGURA pregunta: '¿Mi personaje es hombre?' -> Respuesta: SÍ
-[20:01:50] MAQUINA ARRIESGADA pregunta: '¿Mi personaje tiene remera roja?' -> Respuesta: NO
-[20:01:53] MAQUINA SEGURA pregunta: '¿Mi personaje es calvo?' -> Respuesta: SÍ
-[20:01:55] MAQUINA ARRIESGADA pregunta: '¿Mi personaje usa gorro?' -> Respuesta: NO
-[20:01:58] MAQUINA SEGURA pregunta: '¿Mi personaje tiene remera lila?' -> Respuesta: SÍ
-[20:02:00] MAQUINA ARRIESGADA pregunta: '¿Mi personaje tiene remera amarilla?' -> Respuesta: SÍ
-[20:02:03] MAQUINA SEGURA intenta adivinar a: 'Pedro' -> ¡ACERTÓ Y GANA LA PARTIDA!
+=== NUEVA PARTIDA (27/09/2026 20:01:35) ===
+[20:01:35] MODO: Máquina vs Máquina
+[20:01:35] Personalidad Máquina 1: SEGURA
+[20:01:35] Personalidad Máquina 2: LOCA
+[20:01:35] Personaje Secreto J1 (MAQUINA SEGURA): Lionel
+[20:01:35] Personaje Secreto J2 (MAQUINA LOCA): Paola
+[20:01:38] MAQUINA SEGURA pregunta: '¿Mi personaje es hombre?' -> Respuesta: NO
+[20:01:41] MAQUINA LOCA intenta adivinar a: 'Pedro' -> FALLÓ
+[20:01:43] MAQUINA SEGURA pregunta: '¿Mi personaje usa lentes?' -> Respuesta: NO
+[20:01:46] MAQUINA LOCA intenta adivinar a: 'Mateo' -> FALLÓ
+[20:01:48] MAQUINA SEGURA pregunta: 'Mi personaje es castaño?' -> Respuesta: NO
+[20:01:51] MAQUINA LOCA intenta adivinar a: 'Delfina' -> FALLÓ
+[20:01:53] MAQUINA SEGURA pregunta: '¿Mi personaje es pelirrojo?' -> Respuesta: SÍ

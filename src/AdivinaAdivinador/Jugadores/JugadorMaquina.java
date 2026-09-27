@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import AdivinaAdivinador.Algoritmos.AlgoritmoGreedySeguro;
 import AdivinaAdivinador.Algoritmos.AlgoritmoGreedyArriesgado;
-
 import AdivinaAdivinador.Algoritmos.IEstrategiaPregunta;
 
 public class JugadorMaquina extends Jugador {
@@ -16,10 +15,9 @@ public class JugadorMaquina extends Jugador {
     private final Random random = new Random();
     private final IEstrategiaPregunta estrategiaPregunta;
     private final CreadorDeJuego.Personalidad personalidad;
-    private final Logger logger;
 
     public JugadorMaquina(String nombre, ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntasDisponibles, Personaje personajeSecreto,
-                          ComparadorDePreguntas comparadorDePreguntas, CreadorDeJuego.Personalidad personalidad, Logger logger) {
+                          ComparadorDePreguntas comparadorDePreguntas, CreadorDeJuego.Personalidad personalidad) {
         super(nombre, personajes, preguntasDisponibles, personajeSecreto, comparadorDePreguntas);
         this.personalidad = personalidad;
 

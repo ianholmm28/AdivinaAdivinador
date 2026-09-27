@@ -48,7 +48,7 @@ public class CreadorDeJuego {
                                        new JugadorMaquina("MAQUINA " + personalidad1, personajes, new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad1);
 
         String nombreJugador2 = "MAQUINA " + personalidad2;
-        Jugador jugador2 = new JugadorMaquina(nombreJugador2, new ArrayList<>(personajes), new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad2, logger);
+        Jugador jugador2 = new JugadorMaquina(nombreJugador2, new ArrayList<>(personajes), new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas, personalidad2);
 
         logger.log("Personaje Secreto J1 (" + jugador1.getNombre() + "): " + jugador1.getPersonajeSecreto().getNombre());
         logger.log("Personaje Secreto J2 (" + jugador2.getNombre() + "): " + jugador2.getPersonajeSecreto().getNombre());
