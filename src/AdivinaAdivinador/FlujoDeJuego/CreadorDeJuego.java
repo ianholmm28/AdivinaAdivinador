@@ -10,8 +10,6 @@ import AdivinaAdivinador.Preguntas.ComparadorDePreguntas;
 import AdivinaAdivinador.Preguntas.CreadorDeListaDePreguntas;
 import AdivinaAdivinador.Preguntas.Pregunta;
 
-import AdivinaAdivinador.Utils.Logger;
-
 import java.util.ArrayList;
 
 public class CreadorDeJuego {

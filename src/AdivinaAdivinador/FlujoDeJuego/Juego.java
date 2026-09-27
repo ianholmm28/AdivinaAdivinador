@@ -3,8 +3,6 @@ import AdivinaAdivinador.Jugadores.Jugador;
 import AdivinaAdivinador.Personajes.Personaje;
 import AdivinaAdivinador.Preguntas.Pregunta;
 import AdivinaAdivinador.Preguntas.ComparadorDePreguntas;
-import AdivinaAdivinador.Utils.Logger;
-
 import java.util.Random;
 
 public class Juego {
