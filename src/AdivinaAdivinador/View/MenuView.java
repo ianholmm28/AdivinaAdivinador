@@ -1,7 +1,7 @@
 package AdivinaAdivinador.View;
 
-import AdivinaAdivinador.Utils.GestorLogs;
-import AdivinaAdivinador.Utils.Logger;
+import AdivinaAdivinador.FlujoDeJuego.Logger;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -44,7 +44,6 @@ public class MenuView extends JFrame {
                 personalidad2 = AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.LOCA;
             }
 
-            AdivinaAdivinador.Sistema sistema = new AdivinaAdivinador.Sistema();
             AdivinaAdivinador.Personajes.ComparadorDePersonajes compPersonajes = new AdivinaAdivinador.Personajes.ComparadorDePersonajes();
             AdivinaAdivinador.Algoritmos.AlgoritmoMergeSort merge = new AdivinaAdivinador.Algoritmos.AlgoritmoMergeSort();
             AdivinaAdivinador.Personajes.CreadorDePersonaje creadorPers = new AdivinaAdivinador.Personajes.CreadorDePersonaje(
@@ -57,8 +56,8 @@ public class MenuView extends JFrame {
             AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto selector = new AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto();
             AdivinaAdivinador.Preguntas.ComparadorDePreguntas compPreg = new AdivinaAdivinador.Preguntas.ComparadorDePreguntas();
             
-            Logger logger = new GestorLogs("partida.log");
-            AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego creadorJuego = new AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego(sistema, creadorListaP, creadorListaPreg, selector, compPreg, logger);
+            Logger logger = new Logger("historial_partidas.txt");
+            AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego creadorJuego = new AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego(creadorListaP, creadorListaPreg, selector, compPreg, logger);
             
             AdivinaAdivinador.FlujoDeJuego.Juego nuevoJuego = creadorJuego.crearJuego(AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Modo.HUMANO_VS_MAQUINA, null, personalidad2);
             
@@ -116,7 +115,6 @@ public class MenuView extends JFrame {
             AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad p1 = selec1 == 0 ? AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.SEGURA : (selec1 == 1 ? AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.ARRIESGADA : AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.LOCA);
             AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad p2 = selec2 == 0 ? AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.SEGURA : (selec2 == 1 ? AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.ARRIESGADA : AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Personalidad.LOCA);
 
-            AdivinaAdivinador.Sistema sistema = new AdivinaAdivinador.Sistema();
             AdivinaAdivinador.Personajes.ComparadorDePersonajes compPersonajes = new AdivinaAdivinador.Personajes.ComparadorDePersonajes();
             AdivinaAdivinador.Algoritmos.AlgoritmoMergeSort merge = new AdivinaAdivinador.Algoritmos.AlgoritmoMergeSort();
             AdivinaAdivinador.Personajes.CreadorDePersonaje creadorPers = new AdivinaAdivinador.Personajes.CreadorDePersonaje(
@@ -129,8 +127,8 @@ public class MenuView extends JFrame {
             AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto selector = new AdivinaAdivinador.Personajes.SelectorDePersonajeSecreto();
             AdivinaAdivinador.Preguntas.ComparadorDePreguntas compPreg = new AdivinaAdivinador.Preguntas.ComparadorDePreguntas();
             
-            Logger logger = new GestorLogs("partida.log");
-            AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego creadorJuego = new AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego(sistema, creadorListaP, creadorListaPreg, selector, compPreg, logger);
+            Logger logger = new Logger("historial_partidas.txt");
+            AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego creadorJuego = new AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego(creadorListaP, creadorListaPreg, selector, compPreg, logger);
             
             AdivinaAdivinador.FlujoDeJuego.Juego nuevoJuego = creadorJuego.crearJuego(AdivinaAdivinador.FlujoDeJuego.CreadorDeJuego.Modo.MAQUINA_VS_MAQUINA, p1, p2);
             
@@ -173,9 +171,9 @@ public class MenuView extends JFrame {
                 String[] mensaje;
                 boolean isJ1 = turnoJ1[0];
                 if (isJ1) {
-                    mensaje = nuevoJuego.turnoCualquierMaquina(nuevoJuego.getJugador1(), nuevoJuego.getJugador2());
+                    mensaje = nuevoJuego.turnoCualquierMaquina((AdivinaAdivinador.Jugadores.JugadorMaquina)nuevoJuego.getJugador1(), nuevoJuego.getJugador2());
                 } else {
-                    mensaje = nuevoJuego.turnoCualquierMaquina(nuevoJuego.getJugador2(), nuevoJuego.getJugador1());
+                    mensaje = nuevoJuego.turnoCualquierMaquina((AdivinaAdivinador.Jugadores.JugadorMaquina)nuevoJuego.getJugador2(), nuevoJuego.getJugador1());
                 }
                 
                 gv1.actualizarTableroInterno(nuevoJuego.getJugador1().getPersonajesDescartados());

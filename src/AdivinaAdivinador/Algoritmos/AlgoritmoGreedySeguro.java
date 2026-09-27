@@ -5,8 +5,9 @@ import AdivinaAdivinador.Preguntas.ComparadorDePreguntas;
 import AdivinaAdivinador.Preguntas.Pregunta;
 import java.util.ArrayList;
 
-public class AlgoritmoGreedy {
+public class AlgoritmoGreedySeguro implements IEstrategiaPregunta {
 
+    @Override
     public Pregunta elegirMejorPregunta(ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntas, ComparadorDePreguntas comparadorDePreguntas) {
         Pregunta mejorPregunta = preguntas.get(0);
         int mejorDiferencia = personajes.size();
