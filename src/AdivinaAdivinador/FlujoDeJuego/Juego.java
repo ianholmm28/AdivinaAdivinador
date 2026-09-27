@@ -44,12 +44,18 @@ public class Juego {
         int opcion = actual.elegirOpcion();
         if (opcion == 1) {
             Pregunta pregunta = actual.elegirPregunta();
+            logger.log("Pensamiento de " + actual.getNombre() + " [" + actual.getEstrategiaPregunta().getNombreAlgoritmo() + "]: " + actual.getExplicacionEstrategia());
             boolean resultado = comparadorDePreguntas.coincideCon(opuesto.getPersonajeSecreto(), pregunta);
             actual.eliminarPersonajes(pregunta, resultado);
             logger.log(actual.getNombre() + " pregunta: '" + pregunta.getTexto() + "' -> Respuesta: " + (resultado ? "SÍ" : "NO"));
+            logger.log("Personajes restantes de " + actual.getNombre() + ": " + actual.getPersonajesDisponibles().size());
             return new String[] { actual.getNombre() + " pregunta: " + pregunta.getTexto(), resultado ? "SÍ" : "NO" };
         } else {
             Personaje personajeElegido = actual.adivinarPersonaje();
+            String motivo = actual.getPersonalidad() == CreadorDeJuego.Personalidad.LOCA
+                    ? "porque mi personalidad es LOCA y siempre arriesgo a adivinar directamente sin preguntar."
+                    : "porque quedan solo " + actual.getPersonajesDisponibles().size() + " personajes disponibles y el umbral de riesgo (" + actual.getPersonalidad() + ") determinó que es momento de arriesgar.";
+            logger.log("Pensamiento de " + actual.getNombre() + ": Elegí intentar adivinar a '" + personajeElegido.getNombre() + "' " + motivo);
             if (personajeElegido.equals(opuesto.getPersonajeSecreto())) {
                 logger.log(actual.getNombre() + " intenta adivinar a: '" + personajeElegido.getNombre() + "' -> ¡ACERTÓ Y GANA LA PARTIDA!");
                 return new String[] { "MAQUINA_GANA:" + actual.getNombre() + ":" + personajeElegido.getNombre() };

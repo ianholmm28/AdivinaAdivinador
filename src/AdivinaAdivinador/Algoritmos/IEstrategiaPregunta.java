@@ -7,4 +7,6 @@ import java.util.ArrayList;
 
 public interface IEstrategiaPregunta {
     Pregunta elegirMejorPregunta(ArrayList<Personaje> personajes, ArrayList<Pregunta> preguntas, ComparadorDePreguntas comparadorDePreguntas);
+    String getNombreAlgoritmo();
+    String getUltimaExplicacion();
 }

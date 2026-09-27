@@ -1,13 +1,14 @@
-=== NUEVA PARTIDA (27/09/2026 20:01:35) ===
-[20:01:35] MODO: Máquina vs Máquina
-[20:01:35] Personalidad Máquina 1: SEGURA
-[20:01:35] Personalidad Máquina 2: LOCA
-[20:01:35] Personaje Secreto J1 (MAQUINA SEGURA): Lionel
-[20:01:35] Personaje Secreto J2 (MAQUINA LOCA): Paola
-[20:01:38] MAQUINA SEGURA pregunta: '¿Mi personaje es hombre?' -> Respuesta: NO
-[20:01:41] MAQUINA LOCA intenta adivinar a: 'Pedro' -> FALLÓ
-[20:01:43] MAQUINA SEGURA pregunta: '¿Mi personaje usa lentes?' -> Respuesta: NO
-[20:01:46] MAQUINA LOCA intenta adivinar a: 'Mateo' -> FALLÓ
-[20:01:48] MAQUINA SEGURA pregunta: 'Mi personaje es castaño?' -> Respuesta: NO
-[20:01:51] MAQUINA LOCA intenta adivinar a: 'Delfina' -> FALLÓ
-[20:01:53] MAQUINA SEGURA pregunta: '¿Mi personaje es pelirrojo?' -> Respuesta: SÍ
+=== NUEVA PARTIDA (27/09/2026 20:13:43) ===
+[20:13:43] MODO: Máquina vs Máquina
+[20:13:43] Personalidad Máquina 1: LOCA | Algoritmo: Modo Loca
+[20:13:43] Personalidad Máquina 2: LOCA | Algoritmo: Modo Loca
+[20:13:43] Ejecutando AlgoritmoMergeSort para ordenar los 23 personajes generados según su género...
+[20:13:43] AlgoritmoMergeSort completado: 23 personajes generados y ordenados.
+[20:13:43] Personaje Secreto J1 (MAQUINA LOCA): Sofía
+[20:13:43] Personaje Secreto J2 (MAQUINA LOCA): Patricia
+[20:13:46] Pensamiento de MAQUINA LOCA: Elegí intentar adivinar a 'Santino' porque mi personalidad es LOCA y siempre arriesgo a adivinar directamente sin preguntar.
+[20:13:46] MAQUINA LOCA intenta adivinar a: 'Santino' -> FALLÓ
+[20:13:49] Pensamiento de MAQUINA LOCA: Elegí intentar adivinar a 'Santino' porque mi personalidad es LOCA y siempre arriesgo a adivinar directamente sin preguntar.
+[20:13:49] MAQUINA LOCA intenta adivinar a: 'Santino' -> FALLÓ
+[20:13:51] Pensamiento de MAQUINA LOCA: Elegí intentar adivinar a 'Patricia' porque mi personalidad es LOCA y siempre arriesgo a adivinar directamente sin preguntar.
+[20:13:51] MAQUINA LOCA intenta adivinar a: 'Patricia' -> ¡ACERTÓ Y GANA LA PARTIDA!

@@ -82,4 +82,16 @@ public class JugadorMaquina extends Jugador {
         ArrayList<Personaje> personajesDisponibles = getPersonajesDisponibles();
         return getPersonajesDisponibles().get(random.nextInt(personajesDisponibles.size()));
     }
+
+    public CreadorDeJuego.Personalidad getPersonalidad() {
+        return personalidad;
+    }
+
+    public IEstrategiaPregunta getEstrategiaPregunta() {
+        return estrategiaPregunta;
+    }
+
+    public String getExplicacionEstrategia() {
+        return estrategiaPregunta.getUltimaExplicacion();
+    }
 }

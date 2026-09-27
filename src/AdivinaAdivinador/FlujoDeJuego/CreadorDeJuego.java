@@ -29,19 +29,24 @@ public class CreadorDeJuego {
         this.comparadorDePreguntas = comparadorDePreguntas;
         this.logger = logger;
     }
-
     public Juego crearJuego(Modo modo, Personalidad personalidad1, Personalidad personalidad2) {
         logger.nuevaPartida();
         if (modo == Modo.HUMANO_VS_MAQUINA) {
             logger.log("MODO: Humano vs Máquina");
             logger.log("Personalidad Máquina: " + personalidad2);
+            String alg = personalidad2 == Personalidad.ARRIESGADA ? "AlgoritmoGreedyArriesgado (busca máxima disparidad todo o nada)" : (personalidad2 == Personalidad.SEGURA ? "AlgoritmoGreedySeguro (busca división 50/50)" : "Modo Loca (Adivina siempre)");
+            logger.log("Algoritmo seleccionado para la IA: " + alg);
         } else {
             logger.log("MODO: Máquina vs Máquina");
-            logger.log("Personalidad Máquina 1: " + personalidad1);
-            logger.log("Personalidad Máquina 2: " + personalidad2);
+            String alg1 = personalidad1 == Personalidad.ARRIESGADA ? "AlgoritmoGreedyArriesgado" : (personalidad1 == Personalidad.SEGURA ? "AlgoritmoGreedySeguro" : "Modo Loca");
+            String alg2 = personalidad2 == Personalidad.ARRIESGADA ? "AlgoritmoGreedyArriesgado" : (personalidad2 == Personalidad.SEGURA ? "AlgoritmoGreedySeguro" : "Modo Loca");
+            logger.log("Personalidad Máquina 1: " + personalidad1 + " | Algoritmo: " + alg1);
+            logger.log("Personalidad Máquina 2: " + personalidad2 + " | Algoritmo: " + alg2);
         }
 
+        logger.log("Ejecutando AlgoritmoMergeSort para ordenar los 23 personajes generados según su género...");
         ArrayList<Personaje> personajes = creadorDeListaDePersonajes.generarPersonajes(23);
+        logger.log("AlgoritmoMergeSort completado: 23 personajes generados y ordenados.");
         ArrayList<Pregunta> preguntas = creadorDeListaDePreguntas.crearPreguntas();
 
         Jugador jugador1 = modo == Modo.HUMANO_VS_MAQUINA ? new JugadorHumano("HUMANO", personajes, new ArrayList<>(preguntas), selectorDePersonajeSecreto.seleccionar(personajes), comparadorDePreguntas) :
