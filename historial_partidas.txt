@@ -1,0 +1,14 @@
+=== NUEVA PARTIDA (26/09/2026 20:01:42) ===
+[20:01:42] MODO: Máquina vs Máquina
+[20:01:42] Personalidad Máquina 1: ARRIESGADA
+[20:01:42] Personalidad Máquina 2: SEGURA
+[20:01:42] Personaje Secreto J1 (MAQUINA ARRIESGADA): Pedro
+[20:01:42] Personaje Secreto J2 (MAQUINA SEGURA): Diego
+[20:01:45] MAQUINA ARRIESGADA pregunta: '¿Mi personaje tiene remera azul?' -> Respuesta: NO
+[20:01:48] MAQUINA SEGURA pregunta: '¿Mi personaje es hombre?' -> Respuesta: SÍ
+[20:01:50] MAQUINA ARRIESGADA pregunta: '¿Mi personaje tiene remera roja?' -> Respuesta: NO
+[20:01:53] MAQUINA SEGURA pregunta: '¿Mi personaje es calvo?' -> Respuesta: SÍ
+[20:01:55] MAQUINA ARRIESGADA pregunta: '¿Mi personaje usa gorro?' -> Respuesta: NO
+[20:01:58] MAQUINA SEGURA pregunta: '¿Mi personaje tiene remera lila?' -> Respuesta: SÍ
+[20:02:00] MAQUINA ARRIESGADA pregunta: '¿Mi personaje tiene remera amarilla?' -> Respuesta: SÍ
+[20:02:03] MAQUINA SEGURA intenta adivinar a: 'Pedro' -> ¡ACERTÓ Y GANA LA PARTIDA!
